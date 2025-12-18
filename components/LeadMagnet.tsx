@@ -195,10 +195,9 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 </div>
                 <button 
                   type="submit"
-                  className="w-full bg-white text-black py-6 text-sm tracking-[0.3em] uppercase font-bold hover:bg-[#C5A059] hover:text-white transition-all duration-700 shadow-[0_4px_12px_rgba(0,0,0,0.1)] group overflow-hidden relative mt-6"
+                  className="w-full border border-black py-6 text-sm tracking-[0.3em] uppercase font-bold hover:bg-black hover:text-white transition-all mt-6"
                 >
-                  <span className="relative z-10">Join the Waitlist</span>
-                  <div className="absolute inset-0 bg-[#C5A059] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                  Join the Waitlist
                 </button>
                 
                 {/* Sicherheits-Icon */}
