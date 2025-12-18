@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TWINS Jewelry | The First Collection</title>
     
+    <!-- DNS Prefetch & Preconnect for external resources -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="/index.css" as="style">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -36,10 +46,13 @@
     <meta name="twitter:description" content="Von der Fashion Week inspiriert, für dich entworfen. 8 exklusive Designs in 14K Echtgold. Streng limitiert. Jetzt auf die Priority List setzen.">
     <meta name="twitter:image" content="https://twins-jewelry.com/images/hero/hero-desktop.jpg">
     <meta name="twitter:image:alt" content="TWINS Jewelry - The First Collection">
+    
+    <!-- Tailwind CSS - Must load synchronously for dynamic styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts - Load asynchronously to not block rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -78,7 +91,8 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="/index.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/index.css"></noscript>
 </head>
 <body class="bg-white text-[#1a1a1a] selection:bg-[#C5A059] selection:text-white">
     <div id="root"></div>

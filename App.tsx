@@ -16,6 +16,7 @@ import { CookieBanner } from './components/CookieBanner';
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showExitIntent, setShowExitIntent] = useState(false);
+  const [shouldLoadCookieBanner, setShouldLoadCookieBanner] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +24,15 @@ const App: React.FC = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lazy load Cookie Banner after initial render to improve performance
+  useEffect(() => {
+    // Load cookie banner after page is interactive
+    const timer = setTimeout(() => {
+      setShouldLoadCookieBanner(true);
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -82,7 +92,7 @@ const App: React.FC = () => {
 
       <Footer />
 
-      <CookieBanner />
+      {shouldLoadCookieBanner && <CookieBanner />}
 
       {showExitIntent && (
         <div 
