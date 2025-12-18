@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import type { LeadFormData } from '../types';
 
 interface LeadMagnetProps {
@@ -9,7 +9,7 @@ interface LeadMagnetProps {
 export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   // Einfacher, aber realistischer Counter: Start bei 117, jeden Tag ein paar neue Personen
   const START_COUNT = 117;
-  // Referenzdatum: ab wann der Counter „live“ ist – aktuell so gesetzt,
+  // Referenzdatum: ab wann der Counter „live" ist – aktuell so gesetzt,
   // dass heute ca. 117 angezeigt wird und ab morgen hochzählt.
   const START_DATE = new Date('2025-12-18T00:00:00Z');
   const DAILY_INCREASE = 17; // durchschnittliche neue Personen pro Tag
@@ -24,12 +24,21 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   const liveCount = START_COUNT + daysSinceStart * DAILY_INCREASE;
   const formattedLiveCount = liveCount.toLocaleString('de-DE');
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
   const [formData, setFormData] = useState<LeadFormData>({
     firstName: '',
     email: '',
     goldPreference: 'Gelbgold'
   });
   const [submitted, setSubmitted] = useState(false);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,17 +60,36 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
             
             {/* Vertikaler Mood-Clip */}
             <div>
-              <div className="mx-auto md:mx-0 max-w-[260px] rounded-[32px] overflow-hidden border border-gold/30 shadow-[0_24px_80px_rgba(0,0,0,0.6)] bg-black/50">
+              <div className="mx-auto md:mx-0 max-w-[260px] rounded-lg overflow-hidden border border-white/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] bg-black/50 relative group">
                 <video
+                  ref={videoRef}
                   autoPlay
                   loop
-                  muted
+                  muted={isMuted}
                   playsInline
                   className="w-full h-full object-cover"
                 >
                   <source src="/videos/leadmagnet/clip-1.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                
+                {/* Audio Toggle Button */}
+                <button
+                  onClick={toggleMute}
+                  className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100"
+                  aria-label={isMuted ? "Audio einschalten" : "Audio ausschalten"}
+                >
+                  {isMuted ? (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                  )}
+                </button>
               </div>
             </div>
 
@@ -97,33 +125,33 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
             </div>
           </div>
 
-          <div className="bg-white p-8 md:p-12 text-black shadow-2xl relative">
+          <div className="bg-white p-10 md:p-16 lg:p-20 text-black shadow-2xl relative">
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-widest font-bold mb-2">Vorname <span className="text-gold">*</span></label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">Vorname <span style={{ color: '#C5A059' }}>*</span></label>
                   <input 
                     type="text" 
                     required
                     value={formData.firstName}
                     onChange={e => setFormData({...formData, firstName: e.target.value})}
                     placeholder="Dein Name"
-                    className="w-full border-b border-gray-200 py-3 px-1 focus:border-gold outline-none transition-colors"
+                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#C5A059] outline-none transition-colors placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-widest font-bold mb-2">E-Mail Adresse <span className="text-gold">*</span></label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">E-Mail Adresse <span style={{ color: '#C5A059' }}>*</span></label>
                   <input 
                     type="email" 
                     required
                     value={formData.email}
                     onChange={e => setFormData({...formData, email: e.target.value})}
                     placeholder="hallo@beispiel.de"
-                    className="w-full border-b border-gray-200 py-3 px-1 focus:border-gold outline-none transition-colors"
+                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#C5A059] outline-none transition-colors placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-widest font-bold mb-4">Bevorzugtes Material</label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-5">Bevorzugtes Material</label>
                   <div className="flex gap-4">
                     <label className="flex-1 cursor-pointer">
                       <input 
@@ -135,10 +163,10 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                       />
                       <div
                         className={
-                          `text-center py-3 border transition-all text-xs uppercase tracking-widest ` +
+                          `text-center py-4 transition-all text-sm uppercase tracking-widest font-medium ` +
                           (formData.goldPreference === 'Gelbgold'
-                            ? 'border-gold bg-gold/5 text-black shadow-sm'
-                            : 'border-gray-200 text-gray-500 hover:border-gold/60')
+                            ? 'border border-[#C5A059] bg-[#C5A059]/10 text-black shadow-sm'
+                            : 'border border-gray-200 text-gray-500 hover:border-[#C5A059]/60')
                         }
                       >
                         Gelbgold
@@ -154,10 +182,10 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                       />
                       <div
                         className={
-                          `text-center py-3 border transition-all text-xs uppercase tracking-widest ` +
+                          `text-center py-4 transition-all text-sm uppercase tracking-widest font-medium ` +
                           (formData.goldPreference === 'Weißgold'
-                            ? 'border-gold bg-gold/5 text-black shadow-sm'
-                            : 'border-gray-200 text-gray-500 hover:border-gold/60')
+                            ? 'border border-[#C5A059] bg-[#C5A059]/10 text-black shadow-sm'
+                            : 'border border-gray-200 text-gray-500 hover:border-[#C5A059]/60')
                         }
                       >
                         Weißgold
@@ -167,21 +195,21 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 </div>
                 <button 
                   type="submit"
-                  className="w-full bg-white text-black py-5 text-xs tracking-[0.3em] uppercase font-bold hover:bg-[#C5A059] hover:text-white transition-all duration-700 shadow-[0_4px_12px_rgba(0,0,0,0.1)] group overflow-hidden relative mt-4"
+                  className="w-full bg-white text-black py-6 text-sm tracking-[0.3em] uppercase font-bold hover:bg-[#C5A059] hover:text-white transition-all duration-700 shadow-[0_4px_12px_rgba(0,0,0,0.1)] group overflow-hidden relative mt-6"
                 >
                   <span className="relative z-10">Join the Waitlist</span>
-                  <div className="absolute inset-0 bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                  <div className="absolute inset-0 bg-[#C5A059] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
                 </button>
                 
                 {/* Sicherheits-Icon */}
-                <div className="flex items-center justify-center gap-2 mt-4 mb-2">
-                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-2 mt-6 mb-3">
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
-                  <span className="text-[8px] uppercase tracking-[0.2em] text-gray-500">SSL-verschlüsselt & sicher</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-gray-500">SSL-verschlüsselt & sicher</span>
                 </div>
                 
-                <p className="text-[9px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
+                <p className="text-[10px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
                   Kein Spam. Nur exklusive Updates zur Kollektion. <br />
                   Mit der Anmeldung akzeptierst du unsere Datenschutzbestimmungen.
                 </p>

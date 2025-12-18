@@ -27,7 +27,21 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400 gap-4">
+        {/* Trust Badges */}
+        <div className="mt-16 pt-8 border-t border-gray-100">
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-2">Sichere Zahlung & Versand</p>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 opacity-70">
+              <span className="text-xs font-semibold text-gray-600">VISA</span>
+              <span className="text-xs font-semibold text-gray-600">Mastercard</span>
+              <span className="text-xs font-semibold text-gray-600">PayPal</span>
+              <span className="text-xs font-semibold text-gray-600">Klarna</span>
+              <span className="text-xs font-semibold text-gray-600">DHL</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400 gap-4">
           <p>© 2026 TWINS JEWELRY. ALL RIGHTS RESERVED.</p>
           <p>FROM HAMBURG WITH GOLD.</p>
         </div>

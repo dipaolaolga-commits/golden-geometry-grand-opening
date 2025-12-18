@@ -202,7 +202,7 @@ export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
               <button 
                 className="w-full border border-black py-3 text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-black hover:text-white transition-all"
               >
-                Coming Soon
+                WAITLIST
               </button>
             </div>
           ))}
