@@ -10,6 +10,7 @@ import { LaunchNotice } from './components/LaunchNotice';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
 import { TrustBar } from './components/TrustBar';
+import { CookieBanner } from './components/CookieBanner';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -78,6 +79,8 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
+
+      <CookieBanner />
 
       {showExitIntent && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">

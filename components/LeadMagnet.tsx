@@ -101,9 +101,10 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-widest font-bold mb-2">Vorname <span className="opacity-30 font-light italic">(optional)</span></label>
+                  <label className="block text-[10px] uppercase tracking-widest font-bold mb-2">Vorname <span className="text-gold">*</span></label>
                   <input 
                     type="text" 
+                    required
                     value={formData.firstName}
                     onChange={e => setFormData({...formData, firstName: e.target.value})}
                     placeholder="Dein Name"
@@ -166,10 +167,20 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 </div>
                 <button 
                   type="submit"
-                  className="w-full bg-black text-white py-5 text-xs tracking-[0.3em] uppercase font-bold hover:bg-gold transition-all duration-500 shadow-lg mt-4"
+                  className="w-full bg-white text-black py-5 text-xs tracking-[0.3em] uppercase font-bold hover:bg-[#C5A059] hover:text-white transition-all duration-700 shadow-[0_4px_12px_rgba(0,0,0,0.1)] group overflow-hidden relative mt-4"
                 >
-                  Join the Waitlist
+                  <span className="relative z-10">Join the Waitlist</span>
+                  <div className="absolute inset-0 bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
                 </button>
+                
+                {/* Sicherheits-Icon */}
+                <div className="flex items-center justify-center gap-2 mt-4 mb-2">
+                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-gray-500">SSL-verschlüsselt & sicher</span>
+                </div>
+                
                 <p className="text-[9px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
                   Kein Spam. Nur exklusive Updates zur Kollektion. <br />
                   Mit der Anmeldung akzeptierst du unsere Datenschutzbestimmungen.

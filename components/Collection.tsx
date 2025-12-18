@@ -29,10 +29,9 @@ const PRODUCTS: Product[] = [
     name: "Stella – Beaded Gold Hoop",
     material: "14K Gelbgold",
     image: "/images/products/stella-beaded-gold-hoop/gold.jpg",
-    colors: ['Gelbgold', 'Weißgold'],
+    colors: ['Gelbgold'],
     imagesByColor: {
       Gelbgold: "/images/products/stella-beaded-gold-hoop/gold.jpg",
-      Weißgold: "/images/products/stella-beaded-gold-hoop/white.jpg",
     },
   },
   {

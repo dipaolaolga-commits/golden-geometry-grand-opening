@@ -23,7 +23,6 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col gap-3">
               <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Connect</h4>
               <a href="#" className="text-sm hover:text-gold transition-colors">Instagram</a>
-              <a href="#" className="text-sm hover:text-gold transition-colors">Tattoo Fashion</a>
             </div>
           </div>
         </div>
@@ -36,3 +35,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
