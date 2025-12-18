@@ -16,11 +16,11 @@ export const Story: React.FC = () => {
 
         {/* Content */}
         <div className="max-w-xl">
-          <h2 className="text-4xl md:text-6xl mb-8 leading-tight">
+          <h2 className="text-3xl md:text-5xl mb-8 leading-tight">
             TWINS. <br />
             <span className="italic">EINE EVOLUTION.</span>
           </h2>
-          <div className="space-y-6 text-gray-700 leading-relaxed text-lg font-light">
+          <div className="space-y-6 text-gray-700 leading-relaxed text-base font-light">
             <p>
               Twins Jewelry ist kein Bruch, sondern die nächste Stufe unserer Reise. Von Tattoo Fashion Hamburg zu Fine Jewelry.
             </p>
