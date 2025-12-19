@@ -65,9 +65,25 @@ const App: React.FC = () => {
   }, [showExitIntent]);
 
   const scrollToForm = () => {
-    const element = document.getElementById('waitlist');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Versuche zuerst direkt zum Formular zu scrollen
+    const formElement = document.getElementById('waitlist-form');
+    if (formElement) {
+      // Auf Mobilgeräten etwas mehr Offset, damit das Formular vollständig sichtbar ist
+      const isMobile = window.innerWidth < 768;
+      const offset = isMobile ? 120 : 80;
+      const elementPosition = formElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      // Fallback: Falls das Formular-Element nicht gefunden wird, zur Sektion scrollen
+      const element = document.getElementById('waitlist');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
