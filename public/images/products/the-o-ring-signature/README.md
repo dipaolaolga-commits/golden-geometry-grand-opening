@@ -11,3 +11,4 @@ Dieser Ordner wird im Code unter folgenden Pfaden verwendet:
 - `/images/products/the-o-ring-signature/white.jpg`
 
 
+

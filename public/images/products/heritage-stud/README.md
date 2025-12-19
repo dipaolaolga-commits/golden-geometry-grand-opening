@@ -9,3 +9,4 @@ Dieser Ordner wird im Code unter folgendem Pfad verwendet:
 - `/images/products/heritage-stud/gold.jpg`
 
 
+

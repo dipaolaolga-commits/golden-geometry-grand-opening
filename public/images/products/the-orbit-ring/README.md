@@ -9,3 +9,4 @@ Dieser Ordner wird im Code unter folgendem Pfad verwendet:
 - `/images/products/the-orbit-ring/gold.jpg`
 
 
+

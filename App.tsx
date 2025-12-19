@@ -12,11 +12,15 @@ import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
 import { TrustBar } from './components/TrustBar';
 import { CookieBanner } from './components/CookieBanner';
+import { Impressum } from './components/Impressum';
+import { Datenschutz } from './components/Datenschutz';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showExitIntent, setShowExitIntent] = useState(false);
   const [shouldLoadCookieBanner, setShouldLoadCookieBanner] = useState(false);
+  const [showImpressum, setShowImpressum] = useState(false);
+  const [showDatenschutz, setShowDatenschutz] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,6 +69,26 @@ const App: React.FC = () => {
     }
   };
 
+  // Wenn Impressum angezeigt wird, zeige nur die Impressum-Seite
+  if (showImpressum) {
+    return (
+      <div className="min-h-screen overflow-x-hidden">
+        <Impressum onBack={() => setShowImpressum(false)} />
+        {shouldLoadCookieBanner && <CookieBanner />}
+      </div>
+    );
+  }
+
+  // Wenn Datenschutz angezeigt wird, zeige nur die Datenschutz-Seite
+  if (showDatenschutz) {
+    return (
+      <div className="min-h-screen overflow-x-hidden">
+        <Datenschutz onBack={() => setShowDatenschutz(false)} />
+        {shouldLoadCookieBanner && <CookieBanner />}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen overflow-x-hidden">
       {/* Fixierter Header mit Trust-Bar + Navbar, mit Glass-Effekt beim Scrollen */}
@@ -95,7 +119,10 @@ const App: React.FC = () => {
         <LaunchNotice />
       </main>
 
-      <Footer />
+      <Footer 
+        onImpressumClick={() => setShowImpressum(true)} 
+        onDatenschutzClick={() => setShowDatenschutz(true)} 
+      />
 
       {shouldLoadCookieBanner && <CookieBanner />}
 

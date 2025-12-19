@@ -11,3 +11,4 @@ Der Code erwartet diese Pfade:
 - `/images/products/aurelia-classic-gold-hoop/white.jpg`
 
 
+

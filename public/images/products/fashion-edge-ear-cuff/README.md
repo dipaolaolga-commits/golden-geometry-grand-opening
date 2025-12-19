@@ -9,3 +9,4 @@ Dieser Ordner wird im Code unter folgendem Pfad verwendet:
 - `/images/products/fashion-edge-ear-cuff/gold.jpg`
 
 
+

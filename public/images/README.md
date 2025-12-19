@@ -26,3 +26,4 @@ Empfohlene Ordnerstruktur für Bilder der Landingpage:
 > Hinweis: Lege deine finalen Dateien einfach in diese Ordner. In den Komponenten kannst du sie dann z.B. über `/images/products/product-1.jpg` referenzieren.
 
 
+

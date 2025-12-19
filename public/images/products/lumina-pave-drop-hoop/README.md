@@ -11,3 +11,4 @@ Der Code erwartet diese Pfade:
 - `/images/products/lumina-pave-drop-hoop/white.jpg`
 
 
+

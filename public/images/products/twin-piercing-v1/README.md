@@ -9,3 +9,4 @@ Dieser Ordner wird im Code unter folgendem Pfad verwendet:
 - `/images/products/twin-piercing-v1/white.jpg`
 
 
+

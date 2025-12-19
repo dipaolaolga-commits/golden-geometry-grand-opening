@@ -11,3 +11,4 @@ Der Code erwartet diese Pfade:
 - `/images/products/stella-beaded-gold-hoop/white.jpg`
 
 
+

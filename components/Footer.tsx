@@ -1,7 +1,12 @@
 
 import React from 'react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onImpressumClick?: () => void;
+  onDatenschutzClick?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onImpressumClick, onDatenschutzClick }) => {
   return (
     <footer className="py-20 bg-white border-t border-gray-100">
       <div className="container mx-auto px-6">
@@ -17,8 +22,18 @@ export const Footer: React.FC = () => {
           <div className="flex gap-12">
             <div className="flex flex-col gap-3">
               <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Legal</h4>
-              <a href="#" className="text-sm hover:text-gold transition-colors">Impressum</a>
-              <a href="#" className="text-sm hover:text-gold transition-colors">Datenschutz</a>
+              <button
+                onClick={onImpressumClick}
+                className="text-sm hover:text-gold transition-colors text-left"
+              >
+                Impressum
+              </button>
+              <button
+                onClick={onDatenschutzClick}
+                className="text-sm hover:text-gold transition-colors text-left"
+              >
+                Datenschutz
+              </button>
             </div>
             <div className="flex flex-col gap-3">
               <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Connect</h4>

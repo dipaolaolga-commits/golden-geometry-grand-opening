@@ -11,3 +11,4 @@ Der Code erwartet diese Pfade:
 - `/images/products/gaia-organic-gold-hoop/white.jpg`
 
 
+
