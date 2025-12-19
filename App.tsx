@@ -38,14 +38,19 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleMouseLeave = (event: MouseEvent) => {
       // Nur Desktop, nur wenn der Mauszeiger oben das Fenster verlässt und bereits etwas gescrollt wurde
+      // Und nur einmal pro Session (per sessionStorage gesteuert)
       if (
+        typeof window === 'undefined' ||
         window.innerWidth < 1024 ||
         showExitIntent ||
         window.scrollY < 400 ||
-        event.clientY > 0
+        event.clientY > 0 ||
+        sessionStorage.getItem('exitIntentShown') === 'true'
       ) {
         return;
       }
+
+      sessionStorage.setItem('exitIntentShown', 'true');
       setShowExitIntent(true);
     };
 
