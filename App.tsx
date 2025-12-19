@@ -14,6 +14,7 @@ import { TrustBar } from './components/TrustBar';
 import { CookieBanner } from './components/CookieBanner';
 import { Impressum } from './components/Impressum';
 import { Datenschutz } from './components/Datenschutz';
+import { Loader } from './components/Loader';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
   const [shouldLoadCookieBanner, setShouldLoadCookieBanner] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [showDatenschutz, setShowDatenschutz] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +75,7 @@ const App: React.FC = () => {
   if (showImpressum) {
     return (
       <div className="min-h-screen overflow-x-hidden">
+        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
         <Impressum onBack={() => setShowImpressum(false)} />
         {shouldLoadCookieBanner && <CookieBanner />}
       </div>
@@ -83,6 +86,7 @@ const App: React.FC = () => {
   if (showDatenschutz) {
     return (
       <div className="min-h-screen overflow-x-hidden">
+        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
         <Datenschutz onBack={() => setShowDatenschutz(false)} />
         {shouldLoadCookieBanner && <CookieBanner />}
       </div>
@@ -91,6 +95,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
+      {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
       {/* Fixierter Header mit Trust-Bar + Navbar, mit Glass-Effekt beim Scrollen */}
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
