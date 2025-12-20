@@ -146,7 +146,12 @@ export const TattooStyles: React.FC = () => {
         const isExpanded = expandedStyles.has(index);
 
         return (
-          <section key={index} className="py-12 md:py-24 bg-white text-black">
+          <section key={index} className="py-12 md:py-24 bg-white text-black relative">
+            {index < TATTOO_STYLES.length - 1 && (
+              <div className="absolute bottom-0 left-0 right-0 h-px flex justify-center">
+                <div className="w-3/4 h-full bg-gradient-to-r from-transparent via-[#8B5CF6]/30 to-transparent"></div>
+              </div>
+            )}
             <div className="container mx-auto px-6 max-w-[1200px]">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-5xl mb-4 tracking-tight">
