@@ -29,9 +29,11 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   const [formData, setFormData] = useState<LeadFormData>({
     firstName: '',
     email: '',
+    phone: '',
     goldPreference: 'Gelbgold'
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -44,23 +46,29 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
     e.preventDefault();
     // Simulate API call
     console.log('Lead submitted:', formData);
-    setSubmitted(true);
+    setIsLoading(true);
+    
+    // 2 Sekunden Verzögerung vor der Bestätigung
+    setTimeout(() => {
+      setIsLoading(false);
+      setSubmitted(true);
+    }, 2000);
   };
 
   return (
-    <section id={id} className="py-32 bg-black text-white relative overflow-hidden">
-      {/* Decorative Gold Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gold/5 blur-[100px] -mr-48 -mt-48"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold/5 blur-[100px] -ml-48 -mb-48"></div>
+    <section id={id} className="py-16 md:py-32 text-white relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, #121212, #1A1A1A, #1F1F1F)' }}>
+      {/* Decorative Purple Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 blur-[100px] -mr-48 -mt-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 blur-[100px] -ml-48 -mb-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h2 className="text-5xl md:text-6xl mb-8 leading-tight">EXKLUSIVER <br /><span className="italic text-gold text-4xl md:text-5xl">EARLY ACCESS.</span></h2>
+            <h2 className="text-3xl md:text-5xl mb-8 leading-none text-white">Sichere dir deinen <br /><span className="italic" style={{ color: '#8B5CF6' }}>50€ Voucher.</span></h2>
             
             {/* Vertikaler Mood-Clip */}
             <div>
-              <div className="mx-auto md:mx-0 max-w-[260px] rounded-lg overflow-hidden border border-white/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] bg-black/50 relative group">
+              <div className="mx-auto md:mx-0 max-w-[260px] rounded-lg overflow-hidden border border-white/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] relative group" style={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}>
                 <video
                   ref={videoRef}
                   autoPlay
@@ -68,6 +76,12 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                   muted={isMuted}
                   playsInline
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error('Video loading error:', e);
+                  }}
+                  onLoadedData={() => {
+                    console.log('Video loaded successfully');
+                  }}
                 >
                   <source src="/videos/leadmagnet/clip-1.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
@@ -95,22 +109,22 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-5 h-5 mt-1 border border-gold flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 bg-gold"></div>
+                <div className="w-5 h-5 mt-1 border flex items-center justify-center flex-shrink-0" style={{ borderColor: '#8B5CF6' }}>
+                  <div className="w-2 h-2" style={{ backgroundColor: '#8B5CF6' }}></div>
                 </div>
-                <p className="text-gray-300 text-sm tracking-wide">Zugang zum Shop vor dem offiziellen Launch</p>
+                <p className="text-gray-300 text-sm tracking-wide">Eintragung auf die VIP-Gästeliste</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-5 h-5 mt-1 border border-gold flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 bg-gold"></div>
+                <div className="w-5 h-5 mt-1 border flex items-center justify-center flex-shrink-0" style={{ borderColor: '#8B5CF6' }}>
+                  <div className="w-2 h-2" style={{ backgroundColor: '#8B5CF6' }}></div>
                 </div>
-                <p className="text-gray-300 text-sm tracking-wide">Einmaliger 10 % Vorteil auf die erste Bestellung</p>
+                <p className="text-gray-300 text-sm tracking-wide">50€ Eröffnungs-Voucher (nur vor Ort erhältlich)</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-5 h-5 mt-1 border border-gold flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 bg-gold"></div>
+                <div className="w-5 h-5 mt-1 border flex items-center justify-center flex-shrink-0" style={{ borderColor: '#8B5CF6' }}>
+                  <div className="w-2 h-2" style={{ backgroundColor: '#8B5CF6' }}></div>
                 </div>
-                <p className="text-gray-300 text-sm tracking-wide">Persönliche Benachrichtigung zum Launch</p>
+                <p className="text-gray-300 text-sm tracking-wide">Exklusiver Zugang zum Grand Opening Event</p>
               </div>
             </div>
             
@@ -119,7 +133,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 <span className="font-bold">{formattedLiveCount}</span>
                 <span className="text-sm align-middle ml-1 opacity-80">+</span>
               </span>
-              <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/60">
+              <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-gray-400">
                 Personen bereits dabei
               </span>
             </div>
@@ -129,75 +143,45 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">Vorname <span style={{ color: '#C5A059' }}>*</span></label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">Vorname <span style={{ color: '#8B5CF6' }}>*</span></label>
                   <input 
                     type="text" 
                     required
                     value={formData.firstName}
                     onChange={e => setFormData({...formData, firstName: e.target.value})}
-                    placeholder="Dein Name"
-                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#C5A059] outline-none transition-colors placeholder:text-gray-400"
+                    placeholder="Max Mustermann"
+                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#8B5CF6] outline-none transition-colors placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">E-Mail Adresse <span style={{ color: '#C5A059' }}>*</span></label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">E-Mail Adresse <span style={{ color: '#8B5CF6' }}>*</span></label>
                   <input 
                     type="email" 
                     required
                     value={formData.email}
                     onChange={e => setFormData({...formData, email: e.target.value})}
-                    placeholder="hallo@beispiel.de"
-                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#C5A059] outline-none transition-colors placeholder:text-gray-400"
+                    placeholder="max@beispiel.de"
+                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#8B5CF6] outline-none transition-colors placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-bold mb-5">Bevorzugtes Material</label>
-                  <div className="flex gap-4">
-                    <label className="flex-1 cursor-pointer">
-                      <input 
-                        type="radio" 
-                        name="gold" 
-                        className="hidden"
-                        checked={formData.goldPreference === 'Gelbgold'}
-                        onChange={() => setFormData({...formData, goldPreference: 'Gelbgold'})}
-                      />
-                      <div
-                        className={
-                          `text-center py-4 transition-all text-sm uppercase tracking-widest font-medium ` +
-                          (formData.goldPreference === 'Gelbgold'
-                            ? 'border border-[#C5A059] bg-[#C5A059]/10 text-black shadow-sm'
-                            : 'border border-gray-200 text-gray-500 hover:border-[#C5A059]/60')
-                        }
-                      >
-                        Gelbgold
-                      </div>
-                    </label>
-                    <label className="flex-1 cursor-pointer">
-                      <input 
-                        type="radio" 
-                        name="gold" 
-                        className="hidden"
-                        checked={formData.goldPreference === 'Weißgold'}
-                        onChange={() => setFormData({...formData, goldPreference: 'Weißgold'})}
-                      />
-                      <div
-                        className={
-                          `text-center py-4 transition-all text-sm uppercase tracking-widest font-medium ` +
-                          (formData.goldPreference === 'Weißgold'
-                            ? 'border border-[#C5A059] bg-[#C5A059]/10 text-black shadow-sm'
-                            : 'border border-gray-200 text-gray-500 hover:border-[#C5A059]/60')
-                        }
-                      >
-                        Weißgold
-                      </div>
-                    </label>
-                  </div>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-3">Telefonnummer <span style={{ color: '#8B5CF6' }}>*</span></label>
+                  <input 
+                    type="tel" 
+                    required
+                    value={formData.phone}
+                    onChange={e => setFormData({...formData, phone: e.target.value})}
+                    placeholder="+49 123 456789"
+                    className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#8B5CF6] outline-none transition-colors placeholder:text-gray-400"
+                  />
                 </div>
                 <button 
                   type="submit"
-                  className="w-full border border-black py-6 text-sm tracking-[0.3em] uppercase font-bold hover:bg-black hover:text-white transition-all mt-6"
+                  disabled={isLoading}
+                  className="w-full text-white py-3 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mt-6 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Join the Waitlist
+                  <span className="relative z-10">{isLoading ? 'Wird gesendet...' : '50€ Voucher sichern'}</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
                 </button>
                 
                 {/* Sicherheits-Icon */}
@@ -209,20 +193,24 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 </div>
                 
                 <p className="text-[10px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
-                  Kein Spam. Nur exklusive Updates zur Kollektion. <br />
-                  Mit der Anmeldung akzeptierst du unsere Datenschutzbestimmungen.
+                  Der 50€ Voucher ist nur vor Ort beim Grand Opening Event erhältlich. <br />
+                  Mit der Anmeldung wirst du auf die VIP-Gästeliste gesetzt. <br />
+                  <br />
+                  Kein Spam. Nur exklusive Updates zum Grand Opening.
                 </p>
               </form>
             ) : (
               <div className="text-center py-12 animate-in fade-in zoom-in duration-500">
-                <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#8B5CF6', opacity: 0.2 }}>
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#FFFFFF' }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <h3 className="serif text-3xl mb-4 text-black">Willkommen im Circle.</h3>
+                <h3 className="serif text-3xl mb-4 text-black">
+                  {formData.firstName ? `${formData.firstName}, du bist auf der VIP-Gästeliste!` : 'Auf der VIP-Gästeliste!'}
+                </h3>
                 <p className="text-gray-500 font-light mb-8">
-                  Dein 10% Code wurde an deine E-Mail gesendet. Wir informieren dich, sobald der Launch beginnt.
+                  Du bist jetzt auf der VIP-Gästeliste. Deinen 50€ Eröffnungs-Voucher erhältst du exklusiv vor Ort beim Grand Opening Event.
                 </p>
                 <button 
                   onClick={() => setSubmitted(false)}

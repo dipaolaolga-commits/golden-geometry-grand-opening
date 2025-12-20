@@ -1,19 +1,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { Hero } from './components/Hero';
-import { Story } from './components/Story';
-import { Collection } from './components/Collection';
-import { Quality } from './components/Quality';
-import { Reveal } from './components/Reveal';
-import { TargetAudience } from './components/TargetAudience';
+import { Countdown } from './components/Countdown';
+import { TattooStyles } from './components/TattooStyles';
+import { VoucherSteps } from './components/VoucherSteps';
+import { Testimonials } from './components/Testimonials';
+import { PrecisionMeetsArt } from './components/PrecisionMeetsArt';
+import { MeetTheArtists } from './components/MeetTheArtists';
+import { FAQ } from './components/FAQ';
 import { LeadMagnet } from './components/LeadMagnet';
-import { LaunchNotice } from './components/LaunchNotice';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
 import { TrustBar } from './components/TrustBar';
 import { CookieBanner } from './components/CookieBanner';
 import { Impressum } from './components/Impressum';
 import { Datenschutz } from './components/Datenschutz';
+import { Anmeldung } from './components/Anmeldung';
 import { Loader } from './components/Loader';
 
 const App: React.FC = () => {
@@ -22,6 +24,7 @@ const App: React.FC = () => {
   const [shouldLoadCookieBanner, setShouldLoadCookieBanner] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [showDatenschutz, setShowDatenschutz] = useState(false);
+  const [showAnmeldung, setShowAnmeldung] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -65,25 +68,23 @@ const App: React.FC = () => {
   }, [showExitIntent]);
 
   const scrollToForm = () => {
-    // Versuche zuerst direkt zum Formular zu scrollen
-    const formElement = document.getElementById('waitlist-form');
-    if (formElement) {
-      // Auf Mobilgeräten etwas mehr Offset, damit das Formular vollständig sichtbar ist
-      const isMobile = window.innerWidth < 768;
-      const offset = isMobile ? 120 : 80;
-      const elementPosition = formElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+    // Wenn wir auf der Hauptseite sind, scroll smooth zur Waitlist-Sektion
+    if (!showImpressum && !showDatenschutz && !showAnmeldung) {
+      const waitlistElement = document.getElementById('waitlist');
+      if (waitlistElement) {
+        // Berechne die Position mit Offset für den fixierten Header
+        const headerOffset = 100; // Anpassbar je nach Header-Höhe
+        const elementPosition = waitlistElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    } else {
-      // Fallback: Falls das Formular-Element nicht gefunden wird, zur Sektion scrollen
-      const element = document.getElementById('waitlist');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
+    } else {
+      // Wenn wir auf einer anderen Seite sind, öffne die Anmeldungs-Unterseite
+      setShowAnmeldung(true);
     }
   };
 
@@ -109,6 +110,17 @@ const App: React.FC = () => {
     );
   }
 
+  // Wenn Anmeldung angezeigt wird, zeige nur die Anmeldungs-Seite
+  if (showAnmeldung) {
+    return (
+      <div className="min-h-screen overflow-x-hidden">
+        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
+        <Anmeldung onBack={() => setShowAnmeldung(false)} />
+        {shouldLoadCookieBanner && <CookieBanner />}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen overflow-x-hidden">
       {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
@@ -116,8 +128,8 @@ const App: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-black/70 backdrop-blur-md border-b border-white/10 shadow-lg'
-            : 'bg-black'
+            ? 'backdrop-blur-md border-b border-gray-200 shadow-lg bg-white/90'
+            : 'bg-white'
         }`}
       >
         <Navbar scrolled={scrolled} onCtaClick={scrollToForm} />
@@ -130,26 +142,28 @@ const App: React.FC = () => {
 
       {/* Hauptinhalt – Hero kümmert sich selbst um den Abstand nach dem Header */}
       <main>
-        <Hero onCtaClick={scrollToForm} />
-        <Story />
-        <Quality />
-        <Collection onProductClick={scrollToForm} />
-        <Reveal />
-        <TargetAudience />
+        <Hero onCtaClick={scrollToForm} isLoading={isLoading} />
+        <Countdown onCtaClick={scrollToForm} />
+        <TattooStyles />
+        <VoucherSteps onCtaClick={scrollToForm} />
+        <Testimonials />
+        <PrecisionMeetsArt onCtaClick={scrollToForm} />
+        <MeetTheArtists />
+        <FAQ />
         <LeadMagnet id="waitlist" />
-        <LaunchNotice />
       </main>
 
       <Footer 
         onImpressumClick={() => setShowImpressum(true)} 
-        onDatenschutzClick={() => setShowDatenschutz(true)} 
+        onDatenschutzClick={() => setShowDatenschutz(true)}
+        onAnmeldungClick={() => setShowAnmeldung(true)}
       />
 
       {shouldLoadCookieBanner && <CookieBanner />}
 
       {showExitIntent && (
         <div 
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md px-4 transition-opacity duration-300"
+          className="fixed inset-0 z-[60] flex items-center justify-center backdrop-blur-md px-4 transition-opacity duration-300 bg-white/90"
           style={{ animation: 'fadeIn 0.3s ease-out' }}
           onClick={() => setShowExitIntent(false)}
         >
@@ -171,25 +185,24 @@ const App: React.FC = () => {
 
             {/* Content */}
             <div className="text-center">
-              <p className="text-[9px] uppercase tracking-[0.4em] mb-6" style={{ color: '#C5A059' }}>
+              <p className="text-[9px] uppercase tracking-[0.4em] mb-6" style={{ color: '#8B5CF6' }}>
                 Bevor du gehst
               </p>
               <h3 className="serif text-4xl md:text-5xl mb-6 leading-tight">
-                Sicher dir deinen Zugang vor dem Launch.
+                Sichere dir deinen 50€ Voucher.
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-10 font-light max-w-md mx-auto">
-                Trage dich jetzt in die Priority List ein und erhalte Early Access zum Shop
-                sowie einen einmaligen 10&nbsp;% Vorteil auf deine erste Bestellung.
+                Trage dich jetzt ein und erhalte deinen exklusiven 50€ Voucher für das Grand Opening Event von Golden Geometry.
               </p>
               <button
                 onClick={() => {
                   scrollToForm();
                   setShowExitIntent(false);
                 }}
-                className="w-full bg-white text-black py-5 text-xs tracking-[0.3em] uppercase font-bold hover:bg-[#C5A059] hover:text-white transition-all duration-700 shadow-[0_4px_12px_rgba(0,0,0,0.1)] group overflow-hidden relative"
+                className="w-full text-white py-5 text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out shadow-[0_4px_12px_rgba(139,92,246,0.3)] bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group"
               >
-                <span className="relative z-10">Zur Priority List &amp; 10% Vorteil</span>
-                <div className="absolute inset-0 bg-[#C5A059] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                <span className="relative z-10">50€ Voucher sichern</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
               </button>
             </div>
           </div>

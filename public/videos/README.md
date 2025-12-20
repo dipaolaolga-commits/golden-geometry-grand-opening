@@ -1,17 +1,22 @@
-## Video-Struktur
+# Videos Anleitung
 
-Empfohlene Ordnerstruktur für Videos der Landingpage:
+## Hero Video (Mobile)
+- **Dateiname**: `mobile-hero.mp4`
+- **Format**: MP4
+- **Auflösung**: 1080x1920px (vertikal, 9:16)
+- **Dauer**: 10-30 Sekunden (Loop)
+- **Inhalt**: Atmosphärisches Video vom Studio/Artists
 
-- `public/videos/hero`
-  - Hintergrundvideos für den Hero-Bereich
-  - Beispiel:
-    - `public/videos/hero/background.mp4`
+## LeadMagnet Video
+- **Dateiname**: `clip-1.mp4`
+- **Format**: MP4
+- **Auflösung**: Mindestens 1080x1920px (vertikal)
+- **Dauer**: 10-30 Sekunden (Loop)
+- **Inhalt**: Mood-Video, Tattoo-Prozess, Studio-Atmosphäre
 
-> Hinweis: Du kannst in der `Hero`-Komponente später die externe URL durch einen lokalen Pfad ersetzen, z.B.:
-> 
-> ```tsx
-> <source src="/videos/hero/background.mp4" type="video/mp4" />
-> ```
-
-
-
+## Reveal Video
+- **Dateiname**: `reveal-video.mp4`
+- **Format**: MP4
+- **Auflösung**: Mindestens 1920x1080px (horizontal, 16:9)
+- **Dauer**: 10-30 Sekunden (Loop)
+- **Inhalt**: Tattoo wird aufgetragen, Artist bei der Arbeit
