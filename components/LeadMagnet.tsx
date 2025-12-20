@@ -139,7 +139,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
             </div>
           </div>
 
-          <div id="waitlist-form" className="bg-white p-10 md:p-16 lg:p-20 text-black shadow-2xl relative">
+          <div id="waitlist-form" className="bg-white p-10 md:p-16 lg:p-20 text-black shadow-2xl relative rounded-lg">
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div>

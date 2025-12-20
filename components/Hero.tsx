@@ -86,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(to bottom, #121212, #1A1A1A, #1F1F1F)' }}>
       {/* Cinematic Background with Parallax */}
-      <div className="absolute inset-0 opacity-[0.35] transition-all duration-[2000ms] overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.15] md:opacity-[0.35] transition-all duration-[2000ms] overflow-hidden">
         {/* Desktop: statisches Hero-Bild – Fokus auf oberes Drittel */}
         <img
           ref={desktopImageRef}
@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
 
         <button 
           onClick={onCtaClick}
-          className={`text-white px-8 md:px-12 py-4 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out shadow-[0_20px_50px_rgba(139,92,246,0.3)] bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group ${shouldAnimate ? 'animate-slide-in-bottom-short' : ''}`}
+          className={`text-white px-8 md:px-12 py-4 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group ${shouldAnimate ? 'animate-slide-in-bottom-short' : ''}`}
           style={{ opacity: 0, animationDelay: shouldAnimate ? '0.4s' : '0s' }}
         >
           <span className="relative z-10">Jetzt 50€ Voucher sichern</span>

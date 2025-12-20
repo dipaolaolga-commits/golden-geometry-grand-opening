@@ -42,7 +42,7 @@ export const VoucherSteps: React.FC<VoucherStepsProps> = ({ onCtaClick }) => {
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-12">
           {STEPS.map((step) => (
             <div key={step.number} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
-              <div className="relative aspect-[3/4] overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <img
                   src={step.image}
                   alt={step.title}

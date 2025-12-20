@@ -165,7 +165,7 @@ export const TattooStyles: React.FC = () => {
                   return (
                     <div
                       key={imgIndex}
-                      className="relative aspect-square overflow-hidden group cursor-pointer"
+                      className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
                       onClick={() => openLightbox(index, imgIndex)}
                     >
                       <img

@@ -177,7 +177,7 @@ export const Testimonials: React.FC = () => {
 
         <div className="max-w-4xl mx-auto relative">
           {/* Testimonial Card */}
-          <div className="bg-gray-50 border border-gray-200 p-8 md:p-12 mb-8">
+          <div className="bg-gray-50 border border-gray-200 p-8 md:p-12 mb-8 rounded-lg">
             <div className={`transition-opacity duration-700 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
               {/* Google Icon & Verifiziert Badge */}
               <div className="flex items-center gap-2 mb-4">

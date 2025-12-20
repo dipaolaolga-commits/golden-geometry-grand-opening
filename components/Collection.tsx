@@ -125,7 +125,7 @@ export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
                 className="group cursor-pointer max-w-[280px] mx-auto sm:max-w-none"
               >
                 <div 
-                  className="relative aspect-square overflow-hidden mb-6"
+                  className="relative aspect-square overflow-hidden rounded-lg mb-6"
                   onClick={() => {
                     if (projectImage && projectImage.trim() !== '') {
                       openLightbox(imageIndex);
