@@ -6,3 +6,5 @@
 - **Auflösung**: Mindestens 800x1200px (Portrait-Format)
 - **Inhalt**: Portrait der Gründer/Artists
 
+
+

@@ -23,3 +23,5 @@ Das Logo wird verwendet in:
 - `logo-white.svg` oder `logo-white.png` - Weiße Version (falls benötigt)
 - `logo-dark.svg` oder `logo-dark.png` - Dunkle Version (falls benötigt)
 
+
+

@@ -16,3 +16,5 @@
 - Quadratisch (mindestens 800x800px)
 - Portraits der Artists
 
+
+

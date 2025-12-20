@@ -182,3 +182,5 @@ public/images/artists/
 
 Die anderen Ordner (hero, portraits, videos) existieren bereits.
 
+
+
