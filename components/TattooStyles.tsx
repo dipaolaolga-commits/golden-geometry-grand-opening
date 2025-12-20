@@ -147,7 +147,7 @@ export const TattooStyles: React.FC = () => {
 
         return (
           <section key={index} className="py-12 md:py-24 bg-white text-black">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 max-w-[1200px]">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-5xl mb-4 tracking-tight">
                   {style.title}

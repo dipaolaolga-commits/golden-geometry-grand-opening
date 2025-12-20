@@ -61,14 +61,14 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
       <div className="absolute top-0 right-0 w-96 h-96 blur-[100px] -mr-48 -mt-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 blur-[100px] -ml-48 -mb-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>
 
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-8">
             <h2 className="text-3xl md:text-5xl mb-8 leading-none text-white">Sichere dir deinen <br /><span className="italic" style={{ color: '#8B5CF6' }}>50€ Voucher.</span></h2>
             
             {/* Vertikaler Mood-Clip */}
             <div>
-              <div className="mx-auto md:mx-0 max-w-[260px] rounded-lg overflow-hidden border border-white/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] relative group" style={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}>
+              <div className="mx-auto md:mx-0 max-w-[320px] rounded-lg overflow-hidden border border-white/40 shadow-[0_24px_80px_rgba(0,0,0,0.6)] relative group" style={{ backgroundColor: 'rgba(26, 26, 26, 0.5)' }}>
                 <video
                   ref={videoRef}
                   autoPlay

@@ -80,7 +80,7 @@ export const PrecisionMeetsArt: React.FC<PrecisionMeetsArtProps> = ({ onCtaClick
           </div>
 
           {/* Right: Video */}
-          <div className="relative aspect-[9/16] max-w-xs mx-auto rounded-lg overflow-hidden shadow-2xl group">
+          <div className="relative aspect-[9/16] max-w-xs mx-auto rounded-lg overflow-hidden shadow-2xl group border border-white/20">
             <video
               ref={videoRef}
               autoPlay

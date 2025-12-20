@@ -6,7 +6,6 @@ interface CountdownProps {
 }
 
 export const Countdown: React.FC<CountdownProps> = ({ onCtaClick }) => {
-
   return (
     <section className="py-12 md:py-24 bg-white text-black">
       <div className="container mx-auto px-6 text-center">

@@ -106,7 +106,7 @@ export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
 
   return (
     <section className="py-24 bg-[#fcfcfc]">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 max-w-[1200px]">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">UNSERE TATTOO-PROJEKTE</h2>
           <p className="text-sm tracking-[0.2em] uppercase opacity-60 max-w-2xl mx-auto">Entdecke unsere vielfältigen Tattoo-Stile und Projekte.</p>
