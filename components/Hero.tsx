@@ -128,10 +128,10 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
 
       {/* Overlay Content */}
       <div className="relative z-10 container mx-auto px-6 pt-24 md:pt-28 text-center text-white mt-[-1.5rem] md:mt-0">
-        <h1 className={`text-3xl md:text-6xl lg:text-7xl mb-6 tracking-tight leading-tight ${shouldAnimate ? 'animate-slide-in-top' : ''}`} style={{ opacity: shouldAnimate ? undefined : 0 }}>
+        <h1 className={`text-5xl md:text-6xl lg:text-7xl mb-6 tracking-tight leading-tight ${shouldAnimate ? 'animate-slide-in-top' : ''}`} style={{ opacity: shouldAnimate ? undefined : 0 }}>
           <span className="block md:inline">Grand Opening</span>
           <br className="hidden md:block" />
-          <span className="block md:inline italic font-light md:ml-2">Dein 50€ Tattoo-Voucher wartet.</span>
+          <span className="block md:inline text-4xl md:text-6xl italic font-light md:ml-2">Dein 50€ Tattoo-Voucher wartet.</span>
         </h1>
         <p className={`text-xs md:text-base mb-8 md:mb-10 tracking-[0.25em] font-light max-w-2xl mx-auto uppercase ${shouldAnimate ? 'animate-slide-in-bottom opacity-90' : 'opacity-0'}`}>
           Sichere dir jetzt deinen exklusiven Voucher für unser Grand Opening Event.
@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
 
         <button 
           onClick={onCtaClick}
-          className={`text-white px-8 md:px-12 py-4 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group ${shouldAnimate ? 'animate-slide-in-bottom-short' : ''}`}
+          className={`text-white px-10 md:px-12 py-5 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group ${shouldAnimate ? 'animate-slide-in-bottom-short' : ''}`}
           style={{ opacity: 0, animationDelay: shouldAnimate ? '0.4s' : '0s' }}
         >
           <span className="relative z-10">Jetzt 50€ Voucher sichern</span>
