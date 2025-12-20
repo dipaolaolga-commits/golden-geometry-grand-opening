@@ -29,7 +29,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
       }
     }, 16); // ~60fps für flüssige Animation
 
-    // Fallback: Falls etwas schief geht, zeige den Loader trotzdem nach max. 2.5 Sekunden
+    // Fallback: Falls etwas schief geht, zeige den Loader trotzdem nach max. 2 Sekunden
     const timeout = setTimeout(() => {
       clearInterval(interval);
       setProgress(100);
@@ -37,7 +37,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
       setTimeout(() => {
         onLoadComplete();
       }, 300);
-    }, 2300);
+    }, 2000);
 
     return () => {
       clearInterval(interval);

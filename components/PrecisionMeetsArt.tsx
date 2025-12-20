@@ -49,10 +49,10 @@ export const PrecisionMeetsArt: React.FC<PrecisionMeetsArtProps> = ({ onCtaClick
   return (
     <section className="py-12 md:py-24 text-white" style={{ background: 'linear-gradient(to bottom, #121212, #1A1A1A, #1F1F1F)' }}>
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-4 items-center" style={{ paddingLeft: '200px', paddingRight: '200px', rowGap: '16px', columnGap: '0px' }}>
           {/* Left: Text Content */}
           <div>
-            <h2 className="text-4xl md:text-5xl mb-8 tracking-tight text-white">
+            <h2 className="text-4xl md:text-5xl mb-8 tracking-tight text-white" style={{ textAlign: 'left', verticalAlign: 'middle', marginBottom: '32px', width: '400px', height: '100px' }}>
               Wo Präzision auf Kunst trifft.
             </h2>
 
@@ -80,7 +80,7 @@ export const PrecisionMeetsArt: React.FC<PrecisionMeetsArtProps> = ({ onCtaClick
           </div>
 
           {/* Right: Video */}
-          <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl group">
+          <div className="relative aspect-[9/16] max-w-xs mx-auto rounded-lg overflow-hidden shadow-2xl group">
             <video
               ref={videoRef}
               autoPlay

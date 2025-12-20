@@ -56,7 +56,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   };
 
   return (
-    <section id={id} className="py-16 md:py-32 text-white relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, #121212, #1A1A1A, #1F1F1F)' }}>
+    <section id={id} className="py-16 md:py-32 text-white relative overflow-hidden" style={{ backgroundColor: 'rgba(26, 26, 26, 1)' }}>
       {/* Decorative Purple Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 blur-[100px] -mr-48 -mt-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 blur-[100px] -ml-48 -mb-48" style={{ backgroundColor: 'rgba(139, 92, 246, 0.1)' }}></div>

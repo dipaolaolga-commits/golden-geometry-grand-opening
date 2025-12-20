@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Product } from '../types';
+import { Lightbox } from './Lightbox';
 
 const TATTOO_PROJECTS: Product[] = [
   {
@@ -74,8 +75,33 @@ interface CollectionProps {
 }
 
 export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   const getProjectImage = (project: Product) => {
     return project.image;
+  };
+
+  const openLightbox = (imageIndex: number) => {
+    const allImages = TATTOO_PROJECTS
+      .map(project => getProjectImage(project))
+      .filter(img => img && img.trim() !== '');
+    setLightboxImages(allImages);
+    setLightboxIndex(imageIndex);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = () => {
+    setLightboxIndex((prev) => (prev + 1) % lightboxImages.length);
+  };
+
+  const prevImage = () => {
+    setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
   };
 
   return (
@@ -87,48 +113,75 @@ export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
-          {TATTOO_PROJECTS.map((project) => (
-            <div
-              key={project.id}
-              className="group cursor-pointer max-w-[280px] mx-auto sm:max-w-none"
-              onClick={onProductClick}
-            >
-              <div className="relative aspect-square overflow-hidden mb-6">
-                {getProjectImage(project) && getProjectImage(project).trim() !== '' ? (
-                  <>
-                    <img 
-                      src={getProjectImage(project)} 
-                      alt={project.name} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="text-white text-xs tracking-widest uppercase bg-black/80 px-4 py-2">Details</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-full h-full flex items-center justify-center bg-white text-[10px] tracking-[0.25em] uppercase text-gray-400 transition-transform duration-700 group-hover:scale-110">
-                      Coming Soon
-                    </div>
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="text-white text-xs tracking-widest uppercase bg-black/80 px-4 py-2">Details</span>
-                    </div>
-                  </>
-                )}
-              </div>
+          {TATTOO_PROJECTS.map((project, index) => {
+            const projectImage = getProjectImage(project);
+            const imageIndex = TATTOO_PROJECTS.slice(0, index)
+              .filter(p => getProjectImage(p) && getProjectImage(p).trim() !== '')
+              .length;
+            
+            return (
+              <div
+                key={project.id}
+                className="group cursor-pointer max-w-[280px] mx-auto sm:max-w-none"
+              >
+                <div 
+                  className="relative aspect-square overflow-hidden mb-6"
+                  onClick={() => {
+                    if (projectImage && projectImage.trim() !== '') {
+                      openLightbox(imageIndex);
+                    } else {
+                      onProductClick();
+                    }
+                  }}
+                >
+                  {projectImage && projectImage.trim() !== '' ? (
+                    <>
+                      <img 
+                        src={projectImage} 
+                        alt={project.name} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="text-white text-xs tracking-widest uppercase bg-black/80 px-4 py-2">Details</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-full h-full flex items-center justify-center bg-white text-[10px] tracking-[0.25em] uppercase text-gray-400 transition-transform duration-700 group-hover:scale-110">
+                        Coming Soon
+                      </div>
+                      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="text-white text-xs tracking-widest uppercase bg-black/80 px-4 py-2">Details</span>
+                      </div>
+                    </>
+                  )}
+                </div>
               <h3 className="text-lg font-medium mb-1 group-hover:text-[#8B5CF6] transition-colors">{project.name}</h3>
               <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">
                 {project.material}
               </p>
               <button 
                 className="w-full border border-black py-3 text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-black hover:text-white transition-all"
+                onClick={onProductClick}
               >
                 Termin anfragen
               </button>
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <Lightbox
+          images={lightboxImages}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onNext={nextImage}
+          onPrev={prevImage}
+        />
+      )}
     </section>
   );
 };

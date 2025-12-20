@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Lightbox } from './Lightbox';
 
 interface TattooStyle {
   title: string;
@@ -48,6 +49,10 @@ const TATTOO_STYLES: TattooStyle[] = [
 
 export const TattooStyles: React.FC = () => {
   const [expandedStyles, setExpandedStyles] = useState<Set<number>>(new Set());
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [validImagesByStyle, setValidImagesByStyle] = useState<Map<number, string[]>>(new Map());
 
   const toggleStyle = (index: number) => {
     const newExpanded = new Set(expandedStyles);
@@ -66,6 +71,72 @@ export const TattooStyles: React.FC = () => {
     }
     // Nur die ersten 6 anzeigen
     return style.images.slice(0, 6);
+  };
+
+  const checkImageExists = (imagePath: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = imagePath;
+    });
+  };
+
+  const getValidImages = async (styleIndex: number, folder: string): Promise<string[]> => {
+    // Prüfe ob wir bereits validierte Bilder für diesen Stil haben
+    if (validImagesByStyle.has(styleIndex)) {
+      return validImagesByStyle.get(styleIndex)!;
+    }
+
+    // Prüfe alle Bilder (bis zu 50)
+    const allImages = generateAllImages(folder, 50);
+    const validImages: string[] = [];
+    
+    // Prüfe jedes Bild asynchron
+    const checkPromises = allImages.map(async (img) => {
+      const exists = await checkImageExists(img);
+      if (exists) {
+        validImages.push(img);
+      }
+      return exists;
+    });
+
+    await Promise.all(checkPromises);
+    
+    // Speichere die validierten Bilder
+    setValidImagesByStyle(prev => {
+      const newMap = new Map(prev);
+      newMap.set(styleIndex, validImages);
+      return newMap;
+    });
+
+    return validImages;
+  };
+
+  const openLightbox = async (styleIndex: number, clickedImageIndex: number) => {
+    const style = TATTOO_STYLES[styleIndex];
+    const validImages = await getValidImages(styleIndex, style.folder);
+    
+    // Finde den Index des angeklickten Bildes in den validierten Bildern
+    const displayImages = getDisplayImages(style, styleIndex);
+    const clickedImage = displayImages[clickedImageIndex];
+    const validIndex = validImages.indexOf(clickedImage);
+    
+    setLightboxImages(validImages);
+    setLightboxIndex(validIndex >= 0 ? validIndex : 0);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = () => {
+    setLightboxIndex((prev) => (prev + 1) % lightboxImages.length);
+  };
+
+  const prevImage = () => {
+    setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
   };
 
   return (
@@ -90,24 +161,27 @@ export const TattooStyles: React.FC = () => {
 
               {/* Image Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
-                {displayImages.map((image, imgIndex) => (
-                  <div
-                    key={imgIndex}
-                    className="relative aspect-square overflow-hidden group cursor-pointer"
-                  >
-                    <img
-                      src={image}
-                      alt={`${style.title} ${imgIndex + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      onError={(e) => {
-                        // Verstecke Bilder, die nicht existieren
-                        const target = e.target as HTMLImageElement;
-                        target.parentElement!.style.display = 'none';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </div>
-                ))}
+                {displayImages.map((image, imgIndex) => {
+                  return (
+                    <div
+                      key={imgIndex}
+                      className="relative aspect-square overflow-hidden group cursor-pointer"
+                      onClick={() => openLightbox(index, imgIndex)}
+                    >
+                      <img
+                        src={image}
+                        alt={`${style.title} ${imgIndex + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                          // Verstecke Bilder, die nicht existieren
+                          const target = e.target as HTMLImageElement;
+                          target.parentElement!.style.display = 'none';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* CTA Button */}
@@ -126,6 +200,17 @@ export const TattooStyles: React.FC = () => {
           </section>
         );
       })}
+
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <Lightbox
+          images={lightboxImages}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onNext={nextImage}
+          onPrev={prevImage}
+        />
+      )}
     </div>
   );
 };
