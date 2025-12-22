@@ -119,8 +119,8 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
         </div>
       </div>
 
-      {/* Subtle Gradient Overlay for Readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 z-0"></div>
+      {/* Subtle Gradient Overlay for Readability – mobil stärker abdunkeln */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70 md:from-black/40 md:via-transparent md:to-black/60 z-0"></div>
 
       {/* Overlay Content */}
       <div className="relative z-10 container mx-auto px-6 pt-24 md:pt-28 text-center text-white mt-[-1.5rem] md:mt-0">

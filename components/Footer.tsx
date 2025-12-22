@@ -13,10 +13,13 @@ export const Footer: React.FC<FooterProps> = ({ onImpressumClick, onDatenschutzC
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-12">
           <div className="mb-6 md:mb-0">
-            <div className="flex flex-col mb-2 md:mb-4">
-              <span className="serif text-xl sm:text-xl md:text-2xl tracking-[0.02em] font-bold text-white md:text-black">GOLDEN GEOMETRY</span>
+            <div className="flex flex-col items-start md:items-start mb-2 md:mb-4">
+              <img
+                src="/images/logo/logo.png"
+                alt="Golden Geometry Logo"
+                className="w-32 sm:w-40 md:w-44"
+              />
             </div>
-            <p className="text-xs uppercase tracking-widest text-gray-400 md:text-gray-400">Tattoo Studio München</p>
           </div>
 
           <div className="grid grid-cols-2 md:flex gap-6 md:gap-12 w-full md:w-auto">

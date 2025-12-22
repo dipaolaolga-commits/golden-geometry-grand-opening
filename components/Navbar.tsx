@@ -9,15 +9,19 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ scrolled, onCtaClick }) => {
   return (
     <nav
-      className="w-full text-black py-4 transition-all duration-500"
+      className="w-full text-black py-2 md:py-3 transition-all duration-500"
     >
       <div className="container mx-auto px-6 flex items-center justify-between gap-4 md:gap-8">
         <div className="flex flex-col">
-          <span className="serif text-sm sm:text-base md:text-xl tracking-[0.02em] font-bold whitespace-nowrap">GOLDEN GEOMETRY</span>
+          <img
+            src="/images/logo/logo-navbar.png"
+            alt="Golden Geometry Logo"
+            className="w-[160px] sm:w-[180px] md:w-[180px] lg:w-[190px] xl:w-[200px] h-auto"
+          />
         </div>
 
         {/* Trust-Elemente (nur Desktop) */}
-        <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-600">
+        <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-600 -mt-2">
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full border border-gray-200 bg-gray-50 text-[#8B5CF6]">
               <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

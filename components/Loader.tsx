@@ -58,11 +58,15 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
         {/* Golden Geometry Logo */}
         <div className="mb-12 w-full">
           <div className="flex flex-col items-center text-center">
-            {/* Text Logo */}
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3">
-              <span className="serif text-3xl sm:text-4xl md:text-6xl tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.15em] font-bold text-black block md:inline">GOLDEN GEOMETRY</span>
-            </div>
-            <span className="mt-3 sm:mt-4 text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-black font-light text-center">Grand Opening</span>
+            {/* Bild-Logo */}
+            <img
+              src="/images/logo/logo.png"
+              alt="Golden Geometry Logo"
+              className="w-48 sm:w-56 md:w-60 mb-4 drop-shadow-md"
+            />
+            <span className="mt-3 sm:mt-4 text-[11px] sm:text-sm md:text-base uppercase tracking-[0.25em] sm:tracking-[0.35em] md:tracking-[0.45em] text-black font-light text-center">
+              Grand Opening am 17.01.2026
+            </span>
           </div>
         </div>
 

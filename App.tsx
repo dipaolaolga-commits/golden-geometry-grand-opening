@@ -142,8 +142,8 @@ const App: React.FC = () => {
       >
         <Navbar scrolled={scrolled} onCtaClick={scrollToForm} />
 
-        {/* Mobile: Trust-Bar unterhalb der Navbar */}
-        <div className="block md:hidden">
+        {/* Mobile: Trust-Bar unterhalb der Navbar, leicht nach oben gezogen */}
+        <div className="block md:hidden -mt-1">
           <TrustBar />
         </div>
       </header>
