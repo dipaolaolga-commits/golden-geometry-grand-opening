@@ -108,10 +108,6 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
             muted={isMuted}
             playsInline
             className="w-full h-full object-cover"
-            style={{
-              transform: `translateY(${scrollY * 0.5}px)`,
-              transition: 'transform 0.1s ease-out'
-            }}
           >
             <source
               src="/videos/hero/mobile-hero.mp4"

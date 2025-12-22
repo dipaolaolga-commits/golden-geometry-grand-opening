@@ -70,11 +70,14 @@ const App: React.FC = () => {
   const scrollToForm = () => {
     // Wenn wir auf der Hauptseite sind, scroll smooth zur Waitlist-Sektion
     if (!showImpressum && !showDatenschutz && !showAnmeldung) {
-      const waitlistElement = document.getElementById('waitlist');
-      if (waitlistElement) {
+      // Versuche zuerst direkt zum Formular zu scrollen
+      const formElement = document.getElementById('waitlist-form');
+      const targetElement = formElement || document.getElementById('waitlist');
+
+      if (targetElement) {
         // Berechne die Position mit Offset für den fixierten Header
         const headerOffset = 100; // Anpassbar je nach Header-Höhe
-        const elementPosition = waitlistElement.getBoundingClientRect().top;
+        const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({

@@ -180,7 +180,12 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                   disabled={isLoading}
                   className="w-full text-white py-3 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mt-6 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <span className="relative z-10">{isLoading ? 'Wird gesendet...' : '50€ Voucher sichern'}</span>
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isLoading && (
+                      <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
+                    )}
+                    <span>{isLoading ? 'Wird gesendet...' : '50€ Voucher sichern'}</span>
+                  </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
                 </button>
                 
@@ -201,7 +206,9 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
               </form>
             ) : (
               <div className="text-center py-12 animate-in fade-in zoom-in duration-500">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#8B5CF6', opacity: 0.2 }}>
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] shadow-[0_20px_50px_rgba(139,92,246,0.5)]"
+                >
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#FFFFFF' }}>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                   </svg>
