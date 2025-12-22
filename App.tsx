@@ -26,10 +26,15 @@ const App: React.FC = () => {
   const [showDatenschutz, setShowDatenschutz] = useState(false);
   const [showAnmeldung, setShowAnmeldung] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 50);
+
+      // Sticky-Button erst nach Hero-Bereich anzeigen (ca. nach einer Bildschirmhöhe)
+      setShowStickyCta(currentScrollY > window.innerHeight * 0.6);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -209,6 +214,24 @@ const App: React.FC = () => {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Sticky Mobile CTA unten – erst nach Hero sichtbar, weich ein-/ausblenden, mit Glass-Hintergrund */}
+      {!showImpressum && !showDatenschutz && !showAnmeldung && (
+        <div
+          className={`fixed bottom-0 left-0 right-0 z-40 md:hidden px-4 pb-4 pt-3 border-t border-gray-200/70 backdrop-blur-md bg-white/85 transition-all duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
+            showStickyCta
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 translate-y-6 pointer-events-none'
+          }`}
+        >
+          <button
+            onClick={scrollToForm}
+            className="w-full text-white py-4 text-[12px] tracking-[0.34em] uppercase font-bold bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] shadow-[0_18px_45px_rgba(139,92,246,0.7)]"
+          >
+            50€ Voucher sichern
+          </button>
         </div>
       )}
     </div>

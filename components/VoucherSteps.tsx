@@ -60,7 +60,7 @@ export const VoucherSteps: React.FC<VoucherStepsProps> = ({ onCtaClick }) => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center hidden md:block">
           <button
             onClick={onCtaClick}
             className="text-white px-10 md:px-12 py-5 md:py-6 text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group"
