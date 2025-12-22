@@ -64,7 +64,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-8">
-            <h2 className="text-3xl md:text-5xl mb-8 leading-none text-white">Sichere dir deinen <br /><span className="italic" style={{ color: '#8B5CF6' }}>50€ Voucher.</span></h2>
+            <h2 className="text-3xl md:text-5xl mb-8 leading-none text-white">Sichere dir deinen <br /><span className="italic" style={{ color: '#8B5CF6' }}>50€ Gutschein.</span></h2>
             
             {/* Vertikaler Mood-Clip */}
             <div>
@@ -118,7 +118,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 <div className="w-5 h-5 mt-1 border flex items-center justify-center flex-shrink-0" style={{ borderColor: '#8B5CF6' }}>
                   <div className="w-2 h-2" style={{ backgroundColor: '#8B5CF6' }}></div>
                 </div>
-                <p className="text-gray-300 text-sm tracking-wide">50€ Eröffnungs-Voucher (nur vor Ort erhältlich)</p>
+                <p className="text-gray-300 text-sm tracking-wide">50€ Eröffnungs-Gutschein (nur vor Ort erhältlich)</p>
               </div>
               <div className="flex items-start gap-4">
                 <div className="w-5 h-5 mt-1 border flex items-center justify-center flex-shrink-0" style={{ borderColor: '#8B5CF6' }}>
@@ -180,11 +180,11 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                   disabled={isLoading}
                   className="w-full text-white py-5 md:py-6 text-[12px] md:text-xs tracking-[0.36em] uppercase font-bold transition-all duration-700 ease-out mt-6 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <span className="relative z-10 flex items-center justify-center gap-2">
                     {isLoading && (
                       <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
                     )}
-                    <span>{isLoading ? 'Wird gesendet...' : '50€ Voucher sichern'}</span>
+                    <span>{isLoading ? 'Wird gesendet...' : '50€ Gutschein sichern'}</span>
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
                 </button>
@@ -198,7 +198,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                 </div>
                 
                 <p className="text-[10px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
-                  Der 50€ Voucher ist nur vor Ort beim Grand Opening Event erhältlich. <br />
+                  Der 50€ Gutschein ist nur vor Ort beim Grand Opening Event erhältlich. <br />
                   Mit der Anmeldung wirst du auf die VIP-Gästeliste gesetzt. <br />
                   <br />
                   Kein Spam. Nur exklusive Updates zum Grand Opening.
@@ -217,7 +217,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                   {formData.firstName ? `${formData.firstName}, du bist auf der VIP-Gästeliste!` : 'Auf der VIP-Gästeliste!'}
                 </h3>
                 <p className="text-gray-500 font-light mb-8">
-                  Du bist jetzt auf der VIP-Gästeliste. Deinen 50€ Eröffnungs-Voucher erhältst du exklusiv vor Ort beim Grand Opening Event.
+                  Du bist jetzt auf der VIP-Gästeliste. Deinen 50€ Eröffnungs-Gutschein erhältst du exklusiv vor Ort beim Grand Opening Event.
                 </p>
                 <button 
                   onClick={() => setSubmitted(false)}

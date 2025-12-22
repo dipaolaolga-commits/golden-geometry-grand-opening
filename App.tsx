@@ -197,10 +197,10 @@ const App: React.FC = () => {
                 Bevor du gehst
               </p>
               <h3 className="serif text-4xl md:text-5xl mb-6 leading-tight">
-                Sichere dir deinen 50€ Voucher.
+                Sichere dir deinen 50€ Gutschein.
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-10 font-light max-w-md mx-auto">
-                Trage dich jetzt ein und erhalte deinen exklusiven 50€ Voucher für das Grand Opening Event von Golden Geometry.
+                Trage dich jetzt ein und erhalte deinen exklusiven 50€ Gutschein für das Grand Opening Event von Golden Geometry.
               </p>
               <button
                 onClick={() => {
@@ -209,7 +209,7 @@ const App: React.FC = () => {
                 }}
                 className="w-full text-white py-5 text-xs tracking-[0.3em] uppercase font-bold transition-all duration-700 ease-out shadow-[0_4px_12px_rgba(139,92,246,0.3)] bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group"
               >
-                <span className="relative z-10">50€ Voucher sichern</span>
+                <span className="relative z-10">50€ Gutschein sichern</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
               </button>
             </div>
@@ -230,7 +230,7 @@ const App: React.FC = () => {
             onClick={scrollToForm}
             className="w-full text-white py-4 text-[12px] tracking-[0.34em] uppercase font-bold bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] shadow-[0_18px_45px_rgba(139,92,246,0.7)]"
           >
-            50€ Voucher sichern
+            50€ Gutschein sichern
           </button>
         </div>
       )}

@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, onCtaClick }) => {
           onClick={onCtaClick}
           className="text-[10px] md:text-xs tracking-widest uppercase font-semibold border-b border-black pb-1 hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all"
         >
-          50€ Voucher sichern
+          50€ Gutschein sichern
         </button>
       </div>
     </nav>

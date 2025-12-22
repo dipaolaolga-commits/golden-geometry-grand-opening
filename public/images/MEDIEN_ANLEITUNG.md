@@ -40,7 +40,7 @@ public/images/
 ├── voucher-steps/
 │   ├── step-01-wunschmotiv.jpg   # Schritt 1: Wunschmotiv
 │   ├── step-02-termin.jpg        # Schritt 2: Termin buchen
-│   └── step-03-voucher.jpg       # Schritt 3: Voucher einlösen
+│   └── step-03-voucher.jpg       # Schritt 3: Gutschein einlösen
 │
 ├── faq/
 │   └── faq-image.jpg              # Bild für FAQ-Sektion
@@ -98,11 +98,11 @@ public/videos/
 - **Inhalt**: Hochwertige Fotos von fertigen Tattoos im jeweiligen Stil
 - **Anzahl**: 6 Bilder pro Stil
 
-#### Voucher-Steps
+#### Gutschein-Steps
 - **Dateiname**: 
   - `step-01-wunschmotiv.jpg` - Beratung/Idee
   - `step-02-termin.jpg` - Terminbuchung
-  - `step-03-voucher.jpg` - Voucher-Einlösung
+  - `step-03-voucher.jpg` - Gutschein-Einlösung
 - **Format**: JPG
 - **Auflösung**: Mindestens 800x1200px (Portrait-Format)
 - **Inhalt**: Passende Bilder zu den jeweiligen Schritten

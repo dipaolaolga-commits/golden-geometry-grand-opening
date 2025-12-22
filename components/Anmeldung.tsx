@@ -109,7 +109,7 @@ export const Anmeldung: React.FC<AnmeldungProps> = ({ onBack }) => {
               </div>
               
               <p className="text-[10px] text-gray-400 text-center uppercase tracking-[0.15em] leading-relaxed">
-                Der 50€ Voucher ist nur vor Ort beim Grand Opening Event erhältlich. <br />
+                Der 50€ Gutschein ist nur vor Ort beim Grand Opening Event erhältlich. <br />
                 Mit der Anmeldung wirst du auf die VIP-Gästeliste gesetzt. <br />
                 <br />
                 Kein Spam. Nur exklusive Updates zum Grand Opening.
@@ -125,7 +125,7 @@ export const Anmeldung: React.FC<AnmeldungProps> = ({ onBack }) => {
             </div>
             <h3 className="serif text-3xl mb-4 text-black">Auf der VIP-Gästeliste!</h3>
             <p className="text-gray-500 font-light mb-8">
-              Du bist jetzt auf der VIP-Gästeliste. Deinen 50€ Eröffnungs-Voucher erhältst du exklusiv vor Ort beim Grand Opening Event. Wir informieren dich, sobald das Event startet.
+              Du bist jetzt auf der VIP-Gästeliste. Deinen 50€ Eröffnungs-Gutschein erhältst du exklusiv vor Ort beim Grand Opening Event. Wir informieren dich, sobald das Event startet.
             </p>
             <button 
               onClick={onBack}

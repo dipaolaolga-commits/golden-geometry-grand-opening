@@ -8,24 +8,24 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    question: 'Was ist der 50€ Voucher?',
-    answer: 'Der 50€ Voucher ist ein exklusives Angebot zum Grand Opening von Golden Geometry. Du kannst ihn bei deinem ersten Tattoo-Termin einlösen und erhältst 50€ Rabatt auf dein Tattoo.'
+    question: 'Was ist der 50€ Gutschein?',
+    answer: 'Der 50€ Gutschein ist ein exklusives Angebot zum Grand Opening von Golden Geometry. Du kannst ihn bei deinem ersten Tattoo-Termin einlösen und erhältst 50€ Rabatt auf dein Tattoo.'
   },
   {
-    question: 'Wie kann ich den Voucher erhalten?',
-    answer: 'Trage dich einfach in unser Formular ein und du erhältst deinen persönlichen 50€ Voucher-Code per E-Mail. Der Code ist gültig für das Grand Opening Event.'
+    question: 'Wie kann ich den Gutschein erhalten?',
+    answer: 'Trage dich einfach in unser Formular ein und komm zum Grand Opening Event. Dort erhältst du deinen persönlichen 50€ Gutschein ausschließlich vor Ort an der Rezeption.'
   },
   {
     question: 'Wann ist das Grand Opening?',
-    answer: 'Das Grand Opening Event findet in Kürze statt. Trage dich in unsere Liste ein, um als Erster informiert zu werden, sobald der genaue Termin feststeht.'
+    answer: 'Das Grand Opening Event findet am 17. Januar 2026 statt. Trage dich in unsere Liste ein, um alle Details und Updates zum Event zu erhalten.'
   },
   {
-    question: 'Kann ich den Voucher mit anderen Angeboten kombinieren?',
-    answer: 'Der 50€ Voucher kann nicht mit anderen Rabatten oder Aktionen kombiniert werden. Er ist ein exklusives Angebot für unser Grand Opening Event.'
+    question: 'Kann ich den Gutschein mit anderen Angeboten kombinieren?',
+    answer: 'Der 50€ Gutschein kann nicht mit anderen Rabatten oder Aktionen kombiniert werden. Er ist ein exklusives Angebot für unser Grand Opening Event.'
   },
   {
-    question: 'Wie lange ist der Voucher gültig?',
-    answer: 'Der Voucher ist für das Grand Opening Event gültig. Der genaue Zeitraum wird dir per E-Mail mitgeteilt, sobald du dich eingetragen hast.'
+    question: 'Wie lange ist der Gutschein gültig?',
+    answer: 'Der Gutschein ist für das gesamte Jahr 2026 gültig. Du kannst ihn im Zeitraum vom Grand Opening an bis zum 31.12.2026 bei deinem Tattoo-Termin einlösen.'
   }
 ];
 
