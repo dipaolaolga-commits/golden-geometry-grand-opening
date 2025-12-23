@@ -114,6 +114,7 @@ export const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const currentTestimonial = TESTIMONIALS[currentIndex];
   
@@ -151,8 +152,10 @@ export const Testimonials: React.FC = () => {
     }, 300);
   };
 
-  // Automatische Rotation alle 3 Sekunden
+  // Automatische Rotation alle 3 Sekunden (nur wenn nicht pausiert)
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
       setIsTransitioning(true);
       setExpandedIndex(null);
@@ -163,7 +166,7 @@ export const Testimonials: React.FC = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section className="py-12 md:py-24 bg-white text-black">
@@ -177,7 +180,11 @@ export const Testimonials: React.FC = () => {
 
         <div className="max-w-4xl mx-auto relative">
           {/* Testimonial Card */}
-          <div className="bg-gray-50 border border-gray-200 p-8 md:p-12 mb-8 rounded-lg">
+          <div 
+            className="bg-gray-50 border border-gray-200 p-8 md:p-12 mb-8 rounded-lg"
+            onClick={() => setIsPaused(true)}
+            onTouchStart={() => setIsPaused(true)}
+          >
             <div className={`transition-opacity duration-700 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
               {/* Google Icon & Verifiziert Badge */}
               <div className="flex items-center gap-2 mb-4">
@@ -209,11 +216,11 @@ export const Testimonials: React.FC = () => {
               <div className="min-h-[120px] md:min-h-[140px] mb-4">
                 {expandedIndex === currentIndex ? (
                   <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                    "{currentTestimonial.text}"
+                    {currentTestimonial.text}
                   </p>
                 ) : (
                   <p className="text-gray-700 leading-relaxed text-base md:text-lg line-clamp-5">
-                    "{currentTestimonial.text}"
+                    {currentTestimonial.text}
                   </p>
                 )}
               </div>
@@ -222,7 +229,10 @@ export const Testimonials: React.FC = () => {
               <div className="h-6 mb-4">
                 {isTextLong && expandedIndex !== currentIndex && (
                   <button
-                    onClick={() => setExpandedIndex(currentIndex)}
+                    onClick={() => {
+                      setExpandedIndex(currentIndex);
+                      setIsPaused(true);
+                    }}
                     className="text-[#8B5CF6] text-sm font-medium hover:underline"
                   >
                     Mehr lesen

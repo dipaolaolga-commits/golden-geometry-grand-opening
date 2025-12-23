@@ -1,28 +1,18 @@
 
 import React, { useState, useRef } from 'react';
 import type { LeadFormData } from '../types';
+import { useAgencyCounter } from '../contexts/AgencyCounterContext';
 
 interface LeadMagnetProps {
   id?: string;
 }
 
 export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
-  // Einfacher, aber realistischer Counter: Start bei 117, jeden Tag ein paar neue Personen
-  const START_COUNT = 117;
-  // Referenzdatum: ab wann der Counter „live" ist – aktuell so gesetzt,
-  // dass heute ca. 117 angezeigt wird und ab morgen hochzählt.
-  const START_DATE = new Date('2025-12-18T00:00:00Z');
-  const DAILY_INCREASE = 17; // durchschnittliche neue Personen pro Tag
-
-  const today = new Date();
-  const daysSinceStart = Math.max(
-    0,
-    Math.floor(
-      (today.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24)
-    )
-  );
-  const liveCount = START_COUNT + daysSinceStart * DAILY_INCREASE;
-  const formattedLiveCount = liveCount.toLocaleString('de-DE');
+  const { leadMagnetCount } = useAgencyCounter();
+  
+  // Der Counter wird von der Social Proof Notification erhöht
+  // Hier zeigen wir nur den aktuellen Wert an
+  const formattedLiveCount = leadMagnetCount.toLocaleString('de-DE');
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);

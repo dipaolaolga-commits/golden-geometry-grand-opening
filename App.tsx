@@ -17,6 +17,8 @@ import { Impressum } from './components/Impressum';
 import { Datenschutz } from './components/Datenschutz';
 import { Anmeldung } from './components/Anmeldung';
 import { Loader } from './components/Loader';
+import { AgencyCounterProvider } from './contexts/AgencyCounterContext';
+import { SocialProofNotification } from './components/SocialProofNotification';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -99,75 +101,85 @@ const App: React.FC = () => {
   // Wenn Impressum angezeigt wird, zeige nur die Impressum-Seite
   if (showImpressum) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
-        <Impressum onBack={() => setShowImpressum(false)} />
-        {shouldLoadCookieBanner && <CookieBanner />}
-      </div>
+      <AgencyCounterProvider>
+        <div className="min-h-screen overflow-x-hidden">
+          {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
+          <Impressum onBack={() => setShowImpressum(false)} />
+          {shouldLoadCookieBanner && <CookieBanner />}
+        </div>
+      </AgencyCounterProvider>
     );
   }
 
   // Wenn Datenschutz angezeigt wird, zeige nur die Datenschutz-Seite
   if (showDatenschutz) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
-        <Datenschutz onBack={() => setShowDatenschutz(false)} />
-        {shouldLoadCookieBanner && <CookieBanner />}
-      </div>
+      <AgencyCounterProvider>
+        <div className="min-h-screen overflow-x-hidden">
+          {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
+          <Datenschutz onBack={() => setShowDatenschutz(false)} />
+          {shouldLoadCookieBanner && <CookieBanner />}
+        </div>
+      </AgencyCounterProvider>
     );
   }
 
   // Wenn Anmeldung angezeigt wird, zeige nur die Anmeldungs-Seite
   if (showAnmeldung) {
     return (
-      <div className="min-h-screen overflow-x-hidden">
-        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
-        <Anmeldung onBack={() => setShowAnmeldung(false)} />
-        {shouldLoadCookieBanner && <CookieBanner />}
-      </div>
+      <AgencyCounterProvider>
+        <div className="min-h-screen overflow-x-hidden">
+          {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
+          <Anmeldung onBack={() => setShowAnmeldung(false)} />
+          {shouldLoadCookieBanner && <CookieBanner />}
+        </div>
+      </AgencyCounterProvider>
     );
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
-      {/* Fixierter Header mit Trust-Bar + Navbar, mit Glass-Effekt beim Scrollen */}
-      <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          scrolled
-            ? 'backdrop-blur-md border-b border-gray-200 shadow-lg bg-white/90'
-            : 'bg-white'
-        }`}
-      >
-        <Navbar scrolled={scrolled} onCtaClick={scrollToForm} />
+    <AgencyCounterProvider>
+      <div className="min-h-screen overflow-x-hidden">
+        {isLoading && <Loader onLoadComplete={() => setIsLoading(false)} />}
+        {/* Fixierter Header mit Trust-Bar + Navbar, mit Glass-Effekt beim Scrollen */}
+        <header
+          className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+            scrolled
+              ? 'backdrop-blur-md border-b border-gray-200 shadow-lg bg-white/90'
+              : 'bg-white'
+          }`}
+        >
+          <Navbar scrolled={scrolled} onCtaClick={scrollToForm} />
 
-        {/* Mobile: Trust-Bar unterhalb der Navbar, leicht nach oben gezogen */}
-        <div className="block md:hidden -mt-1">
-          <TrustBar />
-        </div>
-      </header>
+          {/* Mobile: Trust-Bar unterhalb der Navbar, leicht nach oben gezogen */}
+          <div className="block md:hidden -mt-1">
+            <TrustBar />
+          </div>
+        </header>
 
-      {/* Hauptinhalt – Hero kümmert sich selbst um den Abstand nach dem Header */}
-      <main>
-        <Hero onCtaClick={scrollToForm} isLoading={isLoading} />
-        <Countdown onCtaClick={scrollToForm} />
-        <TattooStyles />
-        <VoucherSteps onCtaClick={scrollToForm} />
-        <Testimonials />
-        <PrecisionMeetsArt onCtaClick={scrollToForm} />
-        <MeetTheArtists />
-        <FAQ />
-        <LeadMagnet id="waitlist" />
-      </main>
+        {/* Hauptinhalt – Hero kümmert sich selbst um den Abstand nach dem Header */}
+        <main>
+          <Hero onCtaClick={scrollToForm} isLoading={isLoading} />
+          <Countdown onCtaClick={scrollToForm} />
+          <TattooStyles />
+          <VoucherSteps onCtaClick={scrollToForm} />
+          <Testimonials />
+          <PrecisionMeetsArt onCtaClick={scrollToForm} />
+          <MeetTheArtists />
+          <FAQ />
+          <LeadMagnet id="waitlist" />
+        </main>
 
-      <Footer 
-        onImpressumClick={() => setShowImpressum(true)} 
-        onDatenschutzClick={() => setShowDatenschutz(true)}
-        onAnmeldungClick={() => setShowAnmeldung(true)}
-      />
+        <Footer 
+          onImpressumClick={() => setShowImpressum(true)} 
+          onDatenschutzClick={() => setShowDatenschutz(true)}
+          onAnmeldungClick={() => setShowAnmeldung(true)}
+        />
 
-      {shouldLoadCookieBanner && <CookieBanner />}
+        {shouldLoadCookieBanner && <CookieBanner />}
+        
+        {/* Social Proof Notification */}
+        <SocialProofNotification />
 
       {showExitIntent && (
         <div 
@@ -217,24 +229,25 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Sticky Mobile CTA unten – erst nach Hero sichtbar, weich ein-/ausblenden, mit Glass-Hintergrund */}
-      {!showImpressum && !showDatenschutz && !showAnmeldung && (
-        <div
-          className={`fixed bottom-0 left-0 right-0 z-40 md:hidden px-4 pb-4 pt-3 border-t border-gray-200/70 backdrop-blur-md bg-white/85 transition-all duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
-            showStickyCta
-              ? 'opacity-100 translate-y-0 pointer-events-auto'
-              : 'opacity-0 translate-y-6 pointer-events-none'
-          }`}
-        >
-          <button
-            onClick={scrollToForm}
-            className="w-full text-white py-4 text-[12px] tracking-[0.34em] uppercase font-bold bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] shadow-[0_18px_45px_rgba(139,92,246,0.7)]"
+        {/* Sticky Mobile CTA unten – erst nach Hero sichtbar, weich ein-/ausblenden, mit Glass-Hintergrund */}
+        {!showImpressum && !showDatenschutz && !showAnmeldung && (
+          <div
+            className={`fixed bottom-0 left-0 right-0 z-40 md:hidden px-4 pb-4 pt-3 border-t border-gray-200/70 backdrop-blur-md bg-white/85 transition-all duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
+              showStickyCta
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
+                : 'opacity-0 translate-y-6 pointer-events-none'
+            }`}
           >
-            50€ Gutschein sichern
-          </button>
-        </div>
-      )}
-    </div>
+            <button
+              onClick={scrollToForm}
+              className="w-full text-white py-4 text-[12px] tracking-[0.34em] uppercase font-bold bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] shadow-[0_18px_45px_rgba(139,92,246,0.7)]"
+            >
+              50€ Gutschein sichern
+            </button>
+          </div>
+        )}
+      </div>
+    </AgencyCounterProvider>
   );
 };
 

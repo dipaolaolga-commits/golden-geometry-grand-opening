@@ -44,6 +44,14 @@ const TATTOO_STYLES: TattooStyle[] = [
     folder: 'black-grey',
     images: generateAllImages('black-grey', 6), // Initial nur 6 anzeigen
     ctaText: 'Alle Black & Grey Tattoos'
+  },
+  {
+    title: 'Color',
+    subtitle: 'Lebendig, kraftvoll, ausdrucksstark.',
+    description: '',
+    folder: 'color',
+    images: generateAllImages('color', 6), // Initial nur 6 anzeigen
+    ctaText: 'Alle Color Tattoos'
   }
 ];
 
