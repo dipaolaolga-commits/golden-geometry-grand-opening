@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 interface LightboxProps {
   images: string[];
@@ -18,6 +18,25 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
 
   // Swipe-Distanz in Pixel
   const minSwipeDistance = 50;
+
+  // Navigation-Funktionen müssen vor ihrer Verwendung definiert werden
+  const handleNext = useCallback(() => {
+    setCurrentValidIndex((prev) => {
+      if (validImages.length > 0) {
+        return (prev + 1) % validImages.length;
+      }
+      return prev;
+    });
+  }, [validImages.length]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentValidIndex((prev) => {
+      if (validImages.length > 0) {
+        return (prev - 1 + validImages.length) % validImages.length;
+      }
+      return prev;
+    });
+  }, [validImages.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
@@ -41,6 +60,10 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
     if (isRightSwipe) {
       handlePrev();
     }
+    
+    // Reset touch values
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   // Keyboard Navigation
@@ -49,8 +72,10 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
       if (e.key === 'Escape') {
         onClose();
       } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         handlePrev();
       } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
         handleNext();
       }
     };
@@ -63,7 +88,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [onClose, onNext, onPrev]);
+  }, [onClose, handleNext, handlePrev]);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -125,25 +150,10 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
     }
   };
 
-  const handleNext = () => {
-    if (validImages.length > 0) {
-      setCurrentValidIndex((prev) => (prev + 1) % validImages.length);
-    }
-  };
-
-  const handlePrev = () => {
-    if (validImages.length > 0) {
-      setCurrentValidIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
-    }
-  };
-
   return (
     <div
       className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
     >
       {/* Close Button */}
       <button
@@ -182,12 +192,18 @@ export const Lightbox: React.FC<LightboxProps> = ({ images, currentIndex, onClos
 
       {/* Image Container */}
       {validImages.length > 0 && currentValidIndex < validImages.length && (
-        <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
+        <div 
+          className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center touch-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <img
             ref={imageRef}
             src={validImages[currentValidIndex]}
             alt={`Bild ${currentValidIndex + 1} von ${validImages.length}`}
-            className="max-w-full max-h-[90vh] object-contain"
+            className="max-w-full max-h-[90vh] object-contain select-none"
+            draggable={false}
             onLoad={() => handleImageLoad(validImages[currentValidIndex])}
             onError={handleImageError}
           />
