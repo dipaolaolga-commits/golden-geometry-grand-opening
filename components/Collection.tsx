@@ -161,7 +161,7 @@ export const Collection: React.FC<CollectionProps> = ({ onProductClick }) => {
                 {project.material}
               </p>
               <button 
-                className="w-full border border-black py-3 text-[10px] tracking-[0.2em] uppercase font-bold hover:bg-black hover:text-white transition-all"
+                className="w-full border border-black py-3 text-xs md:text-sm tracking-[0.2em] uppercase font-bold hover:bg-black hover:text-white transition-all"
                 onClick={onProductClick}
               >
                 Termin anfragen

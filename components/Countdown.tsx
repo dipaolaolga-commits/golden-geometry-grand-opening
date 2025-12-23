@@ -145,7 +145,7 @@ export const Countdown: React.FC<CountdownProps> = ({ onCtaClick }) => {
         <div className="flex justify-center">
           <button
             onClick={onCtaClick}
-            className="text-white px-10 md:px-12 py-5 md:py-6 text-[11px] md:text-xs tracking-[0.34em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group"
+            className="text-white px-8 md:px-10 py-4 md:py-5 text-xs md:text-sm tracking-[0.34em] uppercase font-bold transition-all duration-700 ease-out mb-8 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] hover:from-[#7C3AED] hover:via-[#6D28D9] hover:to-[#5B21B6] hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(139,92,246,0.6)] relative overflow-hidden group"
           >
             <span className="relative z-10">Auf VIP-Gästeliste eintragen</span>
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
