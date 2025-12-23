@@ -7,6 +7,9 @@ interface LeadMagnetProps {
   id?: string;
 }
 
+// Pabbly Connect Webhook URL
+const PABBLY_WEBHOOK_URL = 'https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZkMDYzMjA0MzA1MjZhNTUzMDUxMzQi_pc';
+
 export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   const { leadMagnetCount } = useAgencyCounter();
   
@@ -24,6 +27,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -32,17 +36,43 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    console.log('Lead submitted:', formData);
     setIsLoading(true);
+    setError(null);
     
-    // 2 Sekunden Verzögerung vor der Bestätigung
-    setTimeout(() => {
+    try {
+      // Sende Daten an Pabbly Webhook
+      const response = await fetch(PABBLY_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          email: formData.email,
+          phone: formData.phone,
+          goldPreference: formData.goldPreference,
+          timestamp: new Date().toISOString(),
+          source: 'Golden Geometry - Lead Magnet Form'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Webhook-Anfrage fehlgeschlagen');
+      }
+
+      const result = await response.json();
+      console.log('Lead erfolgreich an Pabbly gesendet:', result);
+      
+      // Erfolgreich gesendet - zeige Bestätigung
       setIsLoading(false);
       setSubmitted(true);
-    }, 2000);
+    } catch (err) {
+      console.error('Fehler beim Senden an Pabbly Webhook:', err);
+      setError('Es gab einen Fehler beim Senden. Bitte versuche es erneut.');
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -165,6 +195,11 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
                     className="w-full border-b-2 border-gray-200 py-4 px-2 text-base focus:border-[#8B5CF6] outline-none transition-colors placeholder:text-gray-400"
                   />
                 </div>
+                {error && (
+                  <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
                 <button 
                   type="submit"
                   disabled={isLoading}
