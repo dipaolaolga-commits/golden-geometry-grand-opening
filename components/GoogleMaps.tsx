@@ -13,7 +13,7 @@ export const GoogleMaps: React.FC = () => {
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
 
   return (
-    <section className="py-16 md:py-32 bg-white text-black relative overflow-hidden">
+    <section id="location" className="py-16 md:py-32 bg-white text-black relative overflow-hidden">
       {/* Dekorative Akzente – dezent in Purple, aber auf hellem Hintergrund */}
       <div
         className="pointer-events-none absolute top-[-120px] right-[-80px] w-96 h-96 blur-[120px]"

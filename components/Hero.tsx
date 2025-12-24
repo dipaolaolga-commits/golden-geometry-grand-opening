@@ -91,7 +91,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
         <img
           ref={desktopImageRef}
           src="/images/hero/hero-desktop.jpg"
-          alt="TWINS Jewelry Hero"
+          alt="Golden Geometry Studio Innenansicht"
           className="hidden md:block w-full h-full object-cover object-top scale-105"
           style={{
             transform: `translateY(${scrollY * 0.5}px)`,
