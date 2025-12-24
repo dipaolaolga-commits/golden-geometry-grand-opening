@@ -9,6 +9,7 @@ import { PrecisionMeetsArt } from './components/PrecisionMeetsArt';
 import { MeetTheArtists } from './components/MeetTheArtists';
 import { FAQ } from './components/FAQ';
 import { LeadMagnet } from './components/LeadMagnet';
+import { GoogleMaps } from './components/GoogleMaps';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
 import { TrustBar } from './components/TrustBar';
@@ -168,6 +169,7 @@ const App: React.FC = () => {
           <MeetTheArtists />
           <FAQ />
           <LeadMagnet id="waitlist" />
+          <GoogleMaps />
         </main>
 
         <Footer 
