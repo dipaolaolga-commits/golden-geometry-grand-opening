@@ -1,15 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Dunkler Hintergrund passend zum Design -->
-  <rect width="64" height="64" fill="#1a1a1a" rx="10"/>
-  
-  <!-- Logo einbetten - zentriert mit Padding für bessere Darstellung -->
-  <image 
-    href="/images/logo/logo.png" 
-    x="6" 
-    y="6" 
-    width="52" 
-    height="52" 
-    preserveAspectRatio="xMidYMid meet"
-    style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Heller, cleaner Hintergrund -->
+  <rect width="64" height="64" fill="#FFFFFF" rx="8" />
+
+  <!-- Dezente Outline, damit es auch auf hellem Browser-Chrome sichtbar bleibt -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="7" fill="none" stroke="#111111" stroke-width="1" opacity="0.18" />
+
+  <!-- Zwei Gs – reduziert, stark, geometrisch -->
+  <text
+    x="32"
+    y="36"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+    font-size="24"
+    font-weight="800"
+    fill="#111111"
+    text-anchor="middle"
+    letter-spacing="-1.5"
+  >
+    GG
+  </text>
 </svg>
