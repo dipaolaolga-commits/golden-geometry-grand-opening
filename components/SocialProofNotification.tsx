@@ -125,17 +125,15 @@ export const SocialProofNotification: React.FC<SocialProofNotificationProps> = (
     return cleanup;
   };
 
-  // Entferne Benachrichtigungen nach 8 Sekunden (mit fade-out Animation)
+  // Entferne Benachrichtigungen nach 8 Sekunden (nach Slide-Out Animation)
   useEffect(() => {
     if (notifications.length === 0) return;
-
-    const interval = setInterval(() => {
-      setNotifications(prev => 
-        prev.filter(n => Date.now() - n.timestamp < 8000)
-      );
-    }, 1000);
-
-    return () => clearInterval(interval);
+    
+    const timer = setTimeout(() => {
+      setNotifications([]);
+    }, 8000);
+    
+    return () => clearTimeout(timer);
   }, [notifications]);
 
   if (!isVisible || notifications.length === 0) {
@@ -147,16 +145,25 @@ export const SocialProofNotification: React.FC<SocialProofNotificationProps> = (
       <div className="flex flex-col gap-2 items-end px-4 md:items-end">
         {notifications.map((notification) => {
           const age = Date.now() - notification.timestamp;
-          const isFadingOut = age > 6000; // Beginne fade-out nach 6 Sekunden
-          const opacity = isFadingOut ? Math.max(0, 1 - (age - 6000) / 2000) : 1;
+          const isSlidingOut = age > 6000; // Beginne slide-out nach 6 Sekunden
+          
+          // Smooth ease-out Animation für das Wegwischen
+          const slideOutProgress = isSlidingOut ? Math.min(1, (age - 6000) / 800) : 0;
+          const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+          const translateX = isSlidingOut ? easeOutCubic(slideOutProgress) * 400 : 0;
+          const opacity = isSlidingOut ? Math.max(0, 1 - slideOutProgress * 0.5) : 1;
           
           return (
             <div
               key={notification.id}
-              className="bg-white border border-gray-200 rounded-lg shadow-lg px-4 py-2.5 flex items-center gap-2 min-w-[240px] max-w-[calc(100vw-2rem)] md:max-w-[320px] transition-opacity duration-1000 ease-in-out"
+              className="bg-white border border-gray-200 rounded-lg shadow-lg px-4 py-2.5 flex items-center gap-2 min-w-[240px] max-w-[calc(100vw-2rem)] md:max-w-[320px]"
               style={{
-                animation: 'slideInBottom 0.8s ease-out',
+                animation: age < 100 ? 'slideInBottom 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : undefined,
                 opacity: opacity,
+                transform: `translateX(${translateX}px)`,
+                transition: isSlidingOut 
+                  ? 'transform 0.1s ease-out, opacity 0.1s ease-out' 
+                  : 'none',
               }}
             >
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
@@ -171,13 +178,13 @@ export const SocialProofNotification: React.FC<SocialProofNotificationProps> = (
       
       <style>{`
         @keyframes slideInBottom {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
+          from { 
+            opacity: 0; 
+            transform: translateY(12px) scale(0.96); 
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
           }
         }
       `}</style>

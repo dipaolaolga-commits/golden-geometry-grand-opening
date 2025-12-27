@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const [showImpressum, setShowImpressum] = useState(false);
   const [showDatenschutz, setShowDatenschutz] = useState(false);
   const [showAnmeldung, setShowAnmeldung] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
