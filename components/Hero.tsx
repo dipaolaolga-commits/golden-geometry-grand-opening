@@ -93,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
           }}
         />
 
-        {/* Mobile: vertikales Video */}
+        {/* Mobile: vertikales Video - ohne Parallax */}
         <div className="block md:hidden relative w-full h-full">
           <video
             ref={mobileVideoRef}
@@ -102,6 +102,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
             muted={isMuted}
             playsInline
             className="w-full h-full object-cover"
+            style={{ transform: 'none' }}
           >
             <source
               src="/videos/hero/mobile-hero.mp4"
