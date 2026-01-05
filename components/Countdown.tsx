@@ -45,7 +45,7 @@ export const Countdown: React.FC<CountdownProps> = ({ onCtaClick }) => {
                 </svg>
               </div>
               <h3 className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-3">UHRZEIT</h3>
-              <p className="text-black text-lg font-semibold mb-1">Ab 10:00 Uhr –</p>
+              <p className="text-black text-lg font-semibold mb-1">Ab 12:00 Uhr –</p>
               <p className="text-gray-600 text-sm">Open Doors</p>
             </div>
           </div>

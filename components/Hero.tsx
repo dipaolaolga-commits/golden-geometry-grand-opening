@@ -14,7 +14,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, isLoading = false }) => 
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   // Countdown Timer Logic - Zählt rückwärts bis 17. Januar 2026
-  const TARGET_DATE = new Date('2026-01-17T10:00:00'); // 17. Januar 2026, 10:00 Uhr
+  const TARGET_DATE = new Date('2026-01-17T12:00:00'); // 17. Januar 2026, 12:00 Uhr
 
   const calculateTimeLeft = () => {
     const now = new Date();
