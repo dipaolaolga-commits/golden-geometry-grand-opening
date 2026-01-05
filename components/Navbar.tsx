@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useAgencyCounter } from '../contexts/AgencyCounterContext';
 
 interface NavbarProps {
   scrolled: boolean;
@@ -7,12 +8,15 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ scrolled, onCtaClick }) => {
+  const { leadMagnetCount } = useAgencyCounter();
+  const formattedLiveCount = leadMagnetCount.toLocaleString('de-DE');
+
   return (
     <nav
       className="w-full text-black py-2 md:py-3 transition-all duration-500"
     >
-      <div className="container mx-auto px-6 flex items-center justify-between gap-4 md:gap-8">
-        <div className="flex flex-col">
+      <div className="container mx-auto px-6 flex items-center justify-between gap-2 md:gap-4 lg:gap-8">
+        <div className="flex flex-col flex-shrink-0">
           <img
             src="/images/logo/logo-navbar.png"
             alt="Golden Geometry Logo"
@@ -20,8 +24,30 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, onCtaClick }) => {
           />
         </div>
 
+        {/* Counter - Mobil: rechts (anstelle des Buttons), Desktop: in der Mitte */}
+        <div className="flex md:hidden items-center gap-2 text-black flex-shrink-0">
+          <span className="text-xs tracking-[0.15em] uppercase font-bold whitespace-nowrap">
+            {formattedLiveCount}
+            <span className="text-[10px] align-middle ml-0.5 opacity-70">+</span>
+          </span>
+          <span className="text-[9px] uppercase tracking-[0.2em] text-gray-600 whitespace-nowrap">
+            Personen bereits dabei
+          </span>
+        </div>
+
+        {/* Counter - Desktop: in der Mitte zwischen Logo und Trust-Elemente */}
+        <div className="hidden md:flex items-center gap-2 text-black flex-shrink-0">
+          <span className="text-sm tracking-[0.2em] uppercase font-bold whitespace-nowrap">
+            {formattedLiveCount}
+            <span className="text-xs align-middle ml-0.5 opacity-70">+</span>
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-600 whitespace-nowrap">
+            dabei
+          </span>
+        </div>
+
         {/* Trust-Elemente (nur Desktop) */}
-        <div className="hidden md:flex items-center gap-6 text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-600 -mt-2">
+        <div className="hidden md:flex items-center gap-4 lg:gap-6 text-[10px] md:text-xs tracking-[0.25em] uppercase text-gray-600 -mt-2">
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full border border-gray-200 bg-gray-50 text-[#8B5CF6]">
               <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,9 +97,10 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, onCtaClick }) => {
           </div>
         </div>
 
+        {/* Button - nur Desktop (auf Mobil wird der Counter an dieser Stelle angezeigt) */}
         <button 
           onClick={onCtaClick}
-          className="text-[10px] md:text-xs tracking-widest uppercase font-semibold border-b border-black pb-1 hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all"
+          className="hidden md:block text-[10px] md:text-xs tracking-widest uppercase font-semibold border-b border-black pb-1 hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all"
         >
           50€ Gutschein sichern
         </button>
