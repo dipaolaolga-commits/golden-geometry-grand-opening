@@ -10,8 +10,7 @@ export const Anmeldung: React.FC<AnmeldungProps> = ({ onBack }) => {
   const [formData, setFormData] = useState<LeadFormData>({
     firstName: '',
     email: '',
-    phone: '',
-    goldPreference: 'Gelbgold'
+    phone: ''
   });
   const [submitted, setSubmitted] = useState(false);
 

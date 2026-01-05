@@ -17,6 +17,7 @@ const STORAGE_DATE_KEY = 'agencyCounterDate';
 
 const LEADMAGNET_STORAGE_KEY = 'leadMagnetCount';
 const LEADMAGNET_STORAGE_DATE_KEY = 'leadMagnetDate';
+const LEADMAGNET_START_DATE_KEY = 'leadMagnetStartDate';
 
 export const AgencyCounterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [decrementCount, setDecrementCount] = useState(0);
@@ -48,20 +49,56 @@ export const AgencyCounterProvider: React.FC<{ children: React.ReactNode }> = ({
     return 7;
   });
 
-  // LeadMagnet Counter: Basis-Count (117 + täglich 17) + Session-Inkremente
+  // LeadMagnet Counter: Start bei 10, steigt täglich bis Grand Opening (17. Jan 2026) auf 150
   const [leadMagnetCount, setLeadMagnetCountState] = useState(() => {
     if (typeof window === 'undefined') return 0;
     
-    const START_COUNT = 117;
-    const START_DATE = new Date('2025-12-18T00:00:00Z');
-    const DAILY_INCREASE = 17;
+    const START_COUNT = 10;
+    const GRAND_OPENING_DATE = new Date('2026-01-17T00:00:00Z');
+    GRAND_OPENING_DATE.setHours(0, 0, 0, 0);
+    const END_COUNT = 150;
     
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Lade oder setze Startdatum (einmalig beim ersten Besuch)
+    let startDate: Date;
+    try {
+      const storedStartDateStr = localStorage.getItem(LEADMAGNET_START_DATE_KEY);
+      if (storedStartDateStr) {
+        startDate = new Date(storedStartDateStr);
+        startDate.setHours(0, 0, 0, 0);
+      } else {
+        // Erstes Mal: Setze heute als Startdatum
+        startDate = new Date(today);
+        localStorage.setItem(LEADMAGNET_START_DATE_KEY, startDate.toISOString());
+      }
+    } catch {
+      // Bei Fehler, verwende heute als Startdatum
+      startDate = new Date(today);
+    }
+    
+    // Berechne Anzahl der Tage bis zum Grand Opening
+    const totalDays = Math.max(
+      1,
+      Math.ceil((GRAND_OPENING_DATE.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+    );
+    
+    // Berechne tägliche Steigerung, damit wir am Grand Opening bei 150 sind
+    const totalIncrease = END_COUNT - START_COUNT;
+    const dailyIncrease = totalIncrease / totalDays;
+    
+    // Berechne Anzahl der Tage seit Start
     const daysSinceStart = Math.max(
       0,
-      Math.floor((today.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24))
+      Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
     );
-    const baseCount = START_COUNT + daysSinceStart * DAILY_INCREASE;
+    
+    // Berechne Basis-Count für heute (maximal END_COUNT)
+    const baseCount = Math.min(
+      END_COUNT,
+      Math.round(START_COUNT + daysSinceStart * dailyIncrease)
+    );
     
     // Session-spezifische Inkremente (wird pro Session zurückgesetzt)
     try {
@@ -76,7 +113,7 @@ export const AgencyCounterProvider: React.FC<{ children: React.ReactNode }> = ({
       if (storedSessionCount) {
         const sessionCount = parseInt(storedSessionCount, 10);
         if (!isNaN(sessionCount)) {
-          return baseCount + sessionCount;
+          return Math.min(END_COUNT, baseCount + sessionCount);
         }
       }
     } catch {
@@ -104,16 +141,40 @@ export const AgencyCounterProvider: React.FC<{ children: React.ReactNode }> = ({
     if (typeof window === 'undefined') return;
     
     try {
-      const START_COUNT = 117;
-      const START_DATE = new Date('2025-12-18T00:00:00Z');
-      const DAILY_INCREASE = 17;
+      const START_COUNT = 10;
+      const GRAND_OPENING_DATE = new Date('2026-01-17T00:00:00Z');
+      GRAND_OPENING_DATE.setHours(0, 0, 0, 0);
+      const END_COUNT = 150;
       
       const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Lade Startdatum aus localStorage
+      let startDate: Date;
+      const storedStartDateStr = localStorage.getItem(LEADMAGNET_START_DATE_KEY);
+      if (storedStartDateStr) {
+        startDate = new Date(storedStartDateStr);
+        startDate.setHours(0, 0, 0, 0);
+      } else {
+        startDate = new Date(today);
+        localStorage.setItem(LEADMAGNET_START_DATE_KEY, startDate.toISOString());
+      }
+      
+      const totalDays = Math.max(
+        1,
+        Math.ceil((GRAND_OPENING_DATE.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+      );
+      const totalIncrease = END_COUNT - START_COUNT;
+      const dailyIncrease = totalIncrease / totalDays;
+      
       const daysSinceStart = Math.max(
         0,
-        Math.floor((today.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24))
+        Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
       );
-      const baseCount = START_COUNT + daysSinceStart * DAILY_INCREASE;
+      const baseCount = Math.min(
+        END_COUNT,
+        Math.round(START_COUNT + daysSinceStart * dailyIncrease)
+      );
       const sessionIncrement = leadMagnetCount - baseCount;
       
       const todayStr = new Date().toDateString();

@@ -16,5 +16,4 @@ export interface LeadFormData {
   firstName: string;
   email: string;
   phone: string;
-  goldPreference: 'Gelbgold' | 'Weißgold';
 }

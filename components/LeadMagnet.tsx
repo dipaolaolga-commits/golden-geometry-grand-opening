@@ -22,8 +22,7 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
   const [formData, setFormData] = useState<LeadFormData>({
     firstName: '',
     email: '',
-    phone: '',
-    goldPreference: 'Gelbgold'
+    phone: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,9 +51,8 @@ export const LeadMagnet: React.FC<LeadMagnetProps> = ({ id }) => {
           firstName: formData.firstName,
           email: formData.email,
           phone: formData.phone,
-          goldPreference: formData.goldPreference,
           timestamp: new Date().toISOString(),
-          source: 'Golden Geometry - Lead Magnet Form'
+          source: 'Grand Opening Form'
         }),
       });
 
