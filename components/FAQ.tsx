@@ -21,7 +21,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: 'Kann ich den Gutschein mit anderen Angeboten kombinieren?',
-    answer: 'Der 50€ Gutschein kann nicht mit anderen Rabatten oder Aktionen kombiniert werden. Er ist ein exklusives Angebot für unser Grand Opening Event.'
+    answer: 'Ja, der 50€ Gutschein kann mit anderen Rabatten oder Aktionen kombiniert werden. Du kannst ihn immer einsetzen und benutzen.'
   },
   {
     question: 'Wie lange ist der Gutschein gültig?',
